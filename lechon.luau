@@ -1,10 +1,10 @@
 --[[
     ════════════════════════════════════════════════════════════════════
-    ⚡ GameAnalyzer v6.0 — Antigravity / Claude IDE Edition (Universal Roblox Dumper & Spy)
+    ⚡ GameAnalyzer v6.0 — ULTRA IDE EDITION (Glassmorphism & Gradients)
     ════════════════════════════════════════════════════════════════════
     Diseñado para Potassium & Executors Luau Modernos.
-    Interfaz de Usuario Estilo IDE Pro (VSCode / Antigravity / Claude).
-    Todo 100% Autocontenido — ¡Cero dependencias!
+    Interfaz de Usuario Estilo IDE Next-Gen (Gradients, Glass, Neon Glows).
+    100% Autocontenido — ¡Cero dependencias!
     ════════════════════════════════════════════════════════════════════
 ]]
 
@@ -52,9 +52,6 @@ Env.CAPS = {
     writefile            = hasFn("writefile"),
     appendfile           = hasFn("appendfile"),
     readfile             = hasFn("readfile"),
-    isfile               = hasFn("isfile"),
-    isfolder             = hasFn("isfolder"),
-    makefolder           = hasFn("makefolder"),
     setclipboard         = hasFn("setclipboard"),
     hookmetamethod       = hasFn("hookmetamethod"),
     getrawmetatable      = hasFn("getrawmetatable"),
@@ -92,45 +89,42 @@ function Env.serialize(v, depth)
 end
 
 -- ═══════════════════════════════════════════════════════════════════
--- 2. CONFIGURACIÓN Y PALETA DE COLOR IDE (ANTIGRAVITY / CLAUDE)
+-- 2. PALETA DE COLOR Y GLASSMORPHISM (ULTRA MODERN CSS/WEB STYLE)
 -- ═══════════════════════════════════════════════════════════════════
 local Config = {
-    Version = "v6.0 Antigravity IDE",
+    Version = "v6.0 Glass IDE Pro",
     SubFolder = "ReverseKit",
     ToggleKey = Enum.KeyCode.RightControl,
 }
 
 Config.Theme = {
-    BgWindow      = Color3.fromRGB(18, 18, 22),       -- Deep Obsidian #121216
-    BgSidebar     = Color3.fromRGB(13, 13, 16),       -- Sidebar Charcoal #0d0d10
-    BgHeader      = Color3.fromRGB(24, 24, 30),       -- Header Bar #18181e
-    BgCard        = Color3.fromRGB(28, 28, 35),       -- Card Background #1c1c23
-    BgCardHover   = Color3.fromRGB(38, 38, 48),       -- Card Hover state
-    BgCode        = Color3.fromRGB(12, 12, 15),       -- Code Editor dark #0c0c0f
-    BgConsole     = Color3.fromRGB(10, 10, 12),       -- Terminal background
+    BgWindow      = Color3.fromRGB(15, 17, 23),       -- Deep Glass Dark
+    BgSidebar     = Color3.fromRGB(11, 13, 18),       -- Obsidian Sidebar
+    BgHeader      = Color3.fromRGB(20, 23, 31),       -- Header Bar
+    BgCard        = Color3.fromRGB(24, 28, 38),       -- Card Panel
+    BgCardHover   = Color3.fromRGB(34, 40, 54),       -- Hover Accent
+    BgCode        = Color3.fromRGB(10, 12, 16),       -- Editor Background
 
-    -- Accent Colors (Amber / Orange / Terracotta Glow)
-    Accent        = Color3.fromRGB(245, 158, 11),     -- Amber 500 #f59e0b
-    AccentDark    = Color3.fromRGB(217, 119, 6),      -- Amber 600 #d97706
-    AccentGlow    = Color3.fromRGB(251, 191, 36),     -- Amber 400 #fbbf24
+    -- Neon Accent Gradients (Amber / Gold / Cyan / Purple Glows)
+    Accent        = Color3.fromRGB(245, 158, 11),     -- Amber Glow #f59e0b
+    AccentGradient1 = Color3.fromRGB(245, 158, 11),   -- Gold
+    AccentGradient2 = Color3.fromRGB(217, 119, 6),    -- Amber
+    PurpleGradient1 = Color3.fromRGB(168, 85, 247),   -- Purple Glow
+    PurpleGradient2 = Color3.fromRGB(126, 34, 206),
 
-    -- Status & Categorías
-    Success       = Color3.fromRGB(34, 197, 94),      -- Green 500
-    Warning       = Color3.fromRGB(245, 158, 11),     -- Amber 500
-    Danger        = Color3.fromRGB(239, 68, 68),      -- Red 500
-    Info          = Color3.fromRGB(59, 130, 246),     -- Blue 500
-    Purple        = Color3.fromRGB(168, 85, 247),     -- Purple 500
-    Cyan          = Color3.fromRGB(6, 182, 212),      -- Cyan 500
+    Success       = Color3.fromRGB(34, 197, 94),
+    Warning       = Color3.fromRGB(245, 158, 11),
+    Danger        = Color3.fromRGB(239, 68, 68),
+    Info          = Color3.fromRGB(59, 130, 246),
+    Cyan          = Color3.fromRGB(6, 182, 212),
 
-    -- Text Colors
-    TextPrimary   = Color3.fromRGB(243, 244, 246),    -- Off-White #f3f4f6
-    TextSecondary = Color3.fromRGB(156, 163, 175),    -- Cool Gray #9ca3af
-    TextMuted     = Color3.fromRGB(107, 114, 128),    -- Dark Gray #6b7280
-    TextCode      = Color3.fromRGB(229, 231, 235),    -- Light Code font
+    TextPrimary   = Color3.fromRGB(248, 250, 252),
+    TextSecondary = Color3.fromRGB(148, 163, 184),
+    TextMuted     = Color3.fromRGB(100, 116, 139),
+    TextCode      = Color3.fromRGB(226, 232, 240),
 
-    -- Border Colors
-    Border        = Color3.fromRGB(42, 42, 52),       -- Panel stroke
-    BorderFocus   = Color3.fromRGB(245, 158, 11),     -- Focus stroke
+    Border        = Color3.fromRGB(45, 55, 72),
+    BorderGlow    = Color3.fromRGB(245, 158, 11),
 }
 
 Config.CategoryColors = {
@@ -145,31 +139,31 @@ Config.CategoryColors = {
     LOBBY     = Color3.fromRGB(14, 165, 233),
     CRAFT     = Color3.fromRGB(139, 92, 246),
     ANTICHEAT = Color3.fromRGB(225, 29, 72),
-    OTHER     = Color3.fromRGB(107, 114, 128),
+    OTHER     = Color3.fromRGB(100, 116, 139),
 }
 
 local Theme = {
     Colors = Config.Theme,
     Fonts = { Main = Enum.Font.BuilderSans, Bold = Enum.Font.BuilderSansBold, Code = Enum.Font.Code },
-    Sizes = { TitleText = 15, SubText = 13, BodyText = 12, CodeText = 12, BadgeText = 10, SidebarWidth = 200, HeaderHeight = 44, StatusBarHeight = 26 },
-    Corners = { Window = UDim.new(0, 10), Card = UDim.new(0, 8), Button = UDim.new(0, 6), Badge = UDim.new(0, 4) },
+    Sizes = { TitleText = 15, SubText = 13, BodyText = 12, CodeText = 12, BadgeText = 10, SidebarWidth = 210, HeaderHeight = 46, StatusBarHeight = 28 },
+    Corners = { Window = UDim.new(0, 12), Card = UDim.new(0, 8), Button = UDim.new(0, 6), Badge = UDim.new(0, 4) },
 }
 
 -- ═══════════════════════════════════════════════════════════════════
--- 3. SERVICIOS Y ESCÁNERES
+-- 3. ESCÁNERES Y SERVICIOS
 -- ═══════════════════════════════════════════════════════════════════
 local Scanner = {}
 Scanner.RemoteCategories = {
-    DAMAGE    = {"damage","hit","hurt","kill","shoot","attack","combat","bullet","projectile","dealdamage","applydamage","onhit","impact","basicattack","criticalstrike"},
-    FARM      = {"collect","pickup","harvest","farm","gather","haul","away","offline","idle","petal","orb","claimreward","claimedrop","collectcash"},
-    ECONOMY   = {"buy","purchase","shop","pay","spend","sell","trade","money","cash","coin","reward","give","transfer","checkout","unlock","unbox","crate","gacha","spin"},
-    PLAYER    = {"playerdata","syncdata","fetchstate","loadstate","data","profile","sync","character","stats","snapshot","fetchprofile"},
+    DAMAGE    = {"damage","hit","hurt","kill","shoot","attack","combat","bullet","projectile","dealdamage","applydamage","onhit","impact"},
+    FARM      = {"collect","pickup","harvest","farm","gather","haul","away","offline","idle","petal","orb","claimreward","claimedrop"},
+    ECONOMY   = {"buy","purchase","shop","pay","spend","sell","trade","money","cash","coin","reward","give","transfer","checkout","unlock","unbox"},
+    PLAYER    = {"playerdata","syncdata","fetchstate","loadstate","data","profile","sync","character","stats","snapshot"},
     MOVEMENT  = {"teleport","warp","tp","jump","dash","sprint","velocity","moveto","setposition","requestteleport"},
-    VEHICLE   = {"vehicle","chassis","drive","engine","race","getvehicle","vehicleevent","vehiclestats","vehicletune"},
-    SKIN      = {"skin","cosmetic","equip","loadout","inventory","wear","setcosmetic","equippart","skinchanger"},
-    QUEST     = {"quest","mission","objective","complete","finish","daily","challenge","bounty","task"},
-    LOBBY     = {"lobby","mode","round","match","phase","gamestate","startmatch","joinqueue","leavequeue"},
-    STAFF     = {"staff","verdict","grantself","grantpet","givemoney","setmoney","wipeprofil","banwave","kickplayer","spectateuser","apexdashboard","voldexadmin"},
+    VEHICLE   = {"vehicle","chassis","drive","engine","race","getvehicle","vehicleevent","vehiclestats"},
+    SKIN      = {"skin","cosmetic","equip","loadout","inventory","wear","setcosmetic","equippart"},
+    QUEST     = {"quest","mission","objective","complete","finish","daily","challenge","bounty"},
+    LOBBY     = {"lobby","mode","round","match","phase","gamestate","startmatch","joinqueue"},
+    STAFF     = {"staff","verdict","grantself","grantpet","givemoney","setmoney","wipeprofil","banwave","kickplayer","voldexadmin","apexdashboard"},
     CRAFT     = {"craft","blend","mix","combine","brew","forge","merge","fuse"},
     ANTICHEAT = {"anticheat","exploitdetect","cheatdetect","reportcheat","integrity"},
 }
@@ -284,7 +278,7 @@ function RemoteSpy.stop()
     end
 end
 
--- Decompiler Inspector
+-- Decompiler
 local ModuleInspector = {}
 function ModuleInspector.decompileScript(s)
     if not Env.CAPS.decompile then return "-- [Error]: Función 'decompile' no disponible en este executor." end
@@ -292,7 +286,7 @@ function ModuleInspector.decompileScript(s)
     return ok and code or ("-- [Fallo al decompilar]: " .. tostring(code))
 end
 
--- Security Audit Engine
+-- Vulnerability Auditor
 local Vulnerability = {}
 function Vulnerability.analyze()
     local scan = Scanner.scanRemotes()
@@ -320,7 +314,7 @@ function Vulnerability.analyze()
     return audit
 end
 
--- Exporter Service
+-- Exporter
 local Exporter = {}
 function Exporter.saveFile(filename, content)
     if not Env.CAPS.writefile then return false, "writefile no disponible" end
@@ -339,7 +333,7 @@ function Exporter.copyToClipboard(text)
 end
 
 -- ═══════════════════════════════════════════════════════════════════
--- 4. COMPONENTES VISUALES AVANZADOS (IDE UI COMPONENTS)
+-- 4. COMPONENTES VISUALES GLASSMORPHISM & GRADIENTES (WEB/CSS STYLE)
 -- ═══════════════════════════════════════════════════════════════════
 local Components = {}
 
@@ -358,24 +352,50 @@ function Components.createPadding(parent, top, bottom, left, right)
     return p
 end
 
-function Components.createStroke(parent, color, thickness)
+function Components.createStroke(parent, color, thickness, transparency)
     local s = Instance.new("UIStroke")
     s.Color = color or Theme.Colors.Border
     s.Thickness = thickness or 1
+    s.Transparency = transparency or 0
     s.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     s.Parent = parent
     return s
 end
 
+function Components.createGradient(parent, c1, c2, rotation)
+    local g = Instance.new("UIGradient")
+    g.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, c1),
+        ColorSequenceKeypoint.new(1, c2),
+    })
+    g.Rotation = rotation or 45
+    g.Parent = parent
+    return g
+end
+
+function Components.createGlassCard(parent, size, pos)
+    local card = Instance.new("Frame")
+    card.Size = size or UDim2.new(1, 0, 0, 100)
+    if pos then card.Position = pos end
+    card.BackgroundColor3 = Theme.Colors.BgCard
+    card.BackgroundTransparency = 0.15
+    card.BorderSizePixel = 0
+    Components.createCorner(card, Theme.Corners.Card)
+    Components.createPadding(card, 12, 12, 16, 16)
+    Components.createStroke(card, Theme.Colors.Border, 1, 0.3)
+    if parent then card.Parent = parent end
+    return card
+end
+
 function Components.createBadge(text, color, parent)
     local frame = Instance.new("Frame")
     frame.BackgroundColor3 = color or Theme.Colors.Accent
-    frame.BackgroundTransparency = 0.85
+    frame.BackgroundTransparency = 0.8
     frame.BorderSizePixel = 0
     frame.AutomaticSize = Enum.AutomaticSize.XY
     Components.createCorner(frame, Theme.Corners.Badge)
     Components.createPadding(frame, 3, 3, 8, 8)
-    Components.createStroke(frame, color or Theme.Colors.Accent, 1)
+    Components.createStroke(frame, color or Theme.Colors.Accent, 1, 0.4)
 
     local label = Instance.new("TextLabel")
     label.Text = string.upper(text)
@@ -390,19 +410,20 @@ function Components.createBadge(text, color, parent)
     return frame
 end
 
-function Components.createButton(text, onClick, parent, color)
+function Components.createGradientButton(text, onClick, parent, color1, color2)
     local btn = Instance.new("TextButton")
     btn.Text = text
     btn.Font = Theme.Fonts.Bold
     btn.TextSize = Theme.Sizes.BodyText
     btn.TextColor3 = Theme.Colors.TextPrimary
-    btn.BackgroundColor3 = color or Theme.Colors.BgCard
+    btn.BackgroundColor3 = color1 or Theme.Colors.Accent
     btn.BorderSizePixel = 0
-    btn.Size = UDim2.new(0, 110, 0, 32)
+    btn.Size = UDim2.new(0, 140, 0, 36)
     btn.AutoButtonColor = true
     Components.createCorner(btn, Theme.Corners.Button)
-    Components.createPadding(btn, 4, 4, 12, 12)
-    Components.createStroke(btn, Theme.Colors.Border, 1)
+    Components.createPadding(btn, 4, 4, 14, 14)
+    Components.createGradient(btn, color1 or Theme.Colors.AccentGradient1, color2 or Theme.Colors.AccentGradient2, 90)
+    Components.createStroke(btn, Color3.fromRGB(255, 255, 255), 1, 0.7)
 
     if onClick then btn.MouseButton1Click:Connect(onClick) end
     if parent then btn.Parent = parent end
@@ -410,16 +431,10 @@ function Components.createButton(text, onClick, parent, color)
 end
 
 function Components.createMetricCard(parent, title, value, badgeText, badgeColor, icon)
-    local card = Instance.new("Frame")
-    card.Size = UDim2.new(0.315, 0, 0, 100)
-    card.BackgroundColor3 = Theme.Colors.BgCard
-    card.BorderSizePixel = 0
-    Components.createCorner(card, Theme.Corners.Card)
-    Components.createPadding(card, 12, 12, 14, 14)
-    Components.createStroke(card, Theme.Colors.Border, 1)
+    local card = Components.createGlassCard(parent, UDim2.new(0.318, 0, 0, 105))
 
     local topRow = Instance.new("Frame")
-    topRow.Size = UDim2.new(1, 0, 0, 20)
+    topRow.Size = UDim2.new(1, 0, 0, 22)
     topRow.BackgroundTransparency = 1
     topRow.Parent = card
 
@@ -428,7 +443,7 @@ function Components.createMetricCard(parent, title, value, badgeText, badgeColor
     tLabel.Font = Theme.Fonts.Bold
     tLabel.TextSize = Theme.Sizes.BodyText
     tLabel.TextColor3 = Theme.Colors.TextSecondary
-    tLabel.Size = UDim2.new(0.6, 0, 1, 0)
+    tLabel.Size = UDim2.new(0.65, 0, 1, 0)
     tLabel.TextXAlignment = Enum.TextXAlignment.Left
     tLabel.BackgroundTransparency = 1
     tLabel.Parent = topRow
@@ -441,15 +456,24 @@ function Components.createMetricCard(parent, title, value, badgeText, badgeColor
     local vLabel = Instance.new("TextLabel")
     vLabel.Text = tostring(value)
     vLabel.Font = Theme.Fonts.Bold
-    vLabel.TextSize = 24
+    vLabel.TextSize = 26
     vLabel.TextColor3 = badgeColor or Theme.Colors.TextPrimary
-    vLabel.Size = UDim2.new(1, 0, 0, 36)
-    vLabel.Position = UDim2.new(0, 0, 0, 28)
+    vLabel.Size = UDim2.new(1, 0, 0, 38)
+    vLabel.Position = UDim2.new(0, 0, 0, 30)
     vLabel.TextXAlignment = Enum.TextXAlignment.Left
     vLabel.BackgroundTransparency = 1
     vLabel.Parent = card
 
-    if parent then card.Parent = parent end
+    -- Subtle Gradient Glow Line at bottom
+    local line = Instance.new("Frame")
+    line.Size = UDim2.new(1, 0, 0, 2)
+    line.Position = UDim2.new(0, 0, 1, -2)
+    line.BackgroundColor3 = badgeColor or Theme.Colors.Accent
+    line.BorderSizePixel = 0
+    Components.createCorner(line, UDim.new(0, 1))
+    Components.createGradient(line, badgeColor or Theme.Colors.Accent, Theme.Colors.BgCard, 0)
+    line.Parent = card
+
     return card
 end
 
@@ -459,18 +483,18 @@ function Components.createCodeViewer(codeText, parent)
     container.BackgroundColor3 = Theme.Colors.BgCode
     container.BorderSizePixel = 0
     Components.createCorner(container, Theme.Corners.Card)
-    Components.createStroke(container, Theme.Colors.Border, 1)
+    Components.createStroke(container, Theme.Colors.Border, 1, 0.4)
 
     local scroll = Instance.new("ScrollingFrame")
     scroll.Size = UDim2.new(1, 0, 1, 0)
     scroll.BackgroundTransparency = 1
-    scroll.ScrollBarThickness = 5
+    scroll.ScrollBarThickness = 6
     scroll.ScrollBarImageColor3 = Theme.Colors.Accent
     scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
     scroll.AutomaticCanvasSize = Enum.AutomaticSize.XY
     scroll.Parent = container
 
-    Components.createPadding(scroll, 10, 10, 12, 12)
+    Components.createPadding(scroll, 12, 12, 14, 14)
 
     local label = Instance.new("TextLabel")
     label.Text = codeText or ""
@@ -489,27 +513,40 @@ end
 
 function Components.createToast(parentGui, title, msg, color)
     local toast = Instance.new("Frame")
-    toast.Size = UDim2.new(0, 320, 0, 64)
-    toast.Position = UDim2.new(1, -340, 1, -84)
+    toast.Size = UDim2.new(0, 330, 0, 68)
+    toast.Position = UDim2.new(1, -350, 1, -88)
     toast.BackgroundColor3 = Theme.Colors.BgCard
     toast.BorderSizePixel = 0
-    toast.ZIndex = 999
+    toast.ZIndex = 9999
     Components.createCorner(toast, Theme.Corners.Card)
-    Components.createPadding(toast, 10, 10, 14, 14)
+    Components.createPadding(toast, 12, 12, 16, 16)
     Components.createStroke(toast, color or Theme.Colors.Accent, 1.5)
 
     local t = Instance.new("TextLabel")
-    t.Text = title; t.Font = Theme.Fonts.Bold; t.TextSize = Theme.Sizes.SubText; t.TextColor3 = color or Theme.Colors.Accent; t.Size = UDim2.new(1, 0, 0, 18); t.BackgroundTransparency = 1; t.Parent = toast
+    t.Text = title; t.Font = Theme.Fonts.Bold; t.TextSize = Theme.Sizes.SubText; t.TextColor3 = color or Theme.Colors.Accent; t.Size = UDim2.new(1, 0, 0, 20); t.BackgroundTransparency = 1; t.Parent = toast
     local m = Instance.new("TextLabel")
-    m.Text = msg; m.Font = Theme.Fonts.Main; m.TextSize = Theme.Sizes.BodyText; m.TextColor3 = Theme.Colors.TextSecondary; m.Size = UDim2.new(1, 0, 0, 24); m.Position = UDim2.new(0,0,0,22); m.BackgroundTransparency = 1; m.Parent = toast
+    m.Text = msg; m.Font = Theme.Fonts.Main; m.TextSize = Theme.Sizes.BodyText; m.TextColor3 = Theme.Colors.TextSecondary; m.Size = UDim2.new(1, 0, 0, 24); m.Position = UDim2.new(0,0,0,24); m.BackgroundTransparency = 1; m.Parent = toast
     toast.Parent = parentGui
     task.delay(3.5, function() toast:Destroy() end)
 end
 
 -- ═══════════════════════════════════════════════════════════════════
--- 5. INTERFAZ PRINCIPAL ANTIGRAVITY IDE (MAIN LAUNCHER)
+-- 5. CONSTRUCTOR DE INTERFAZ NEXT-GEN (GLASS LAUNCHER)
 -- ═══════════════════════════════════════════════════════════════════
 local function launchIDE()
+    -- Clean previous instances across CoreGui AND PlayerGui to avoid old cache!
+    pcall(function()
+        if Env.Services.CoreGui:FindFirstChild("GameAnalyzerIDE") then
+            Env.Services.CoreGui.GameAnalyzerIDE:Destroy()
+        end
+    end)
+    pcall(function()
+        local lp = Env.Services.Players.LocalPlayer
+        if lp and lp:FindFirstChildOfClass("PlayerGui") and lp.PlayerGui:FindFirstChild("GameAnalyzerIDE") then
+            lp.PlayerGui.GameAnalyzerIDE:Destroy()
+        end
+    end)
+
     local parentGui = nil
     pcall(function() parentGui = Env.Services.CoreGui end)
     if not parentGui or not pcall(function() return parentGui.Name end) then
@@ -517,56 +554,53 @@ local function launchIDE()
         parentGui = lp and lp:FindFirstChildOfClass("PlayerGui") or game:GetService("CoreGui")
     end
 
-    if parentGui:FindFirstChild("GameAnalyzerIDE") then
-        parentGui.GameAnalyzerIDE:Destroy()
-    end
-
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "GameAnalyzerIDE"
     screenGui.ResetOnSpawn = false
     screenGui.Enabled = true
-    screenGui.DisplayOrder = 999
+    screenGui.DisplayOrder = 9999
     screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-    -- Main IDE Container Window
+    -- Main IDE Glass Container Window
     local mainFrame = Instance.new("Frame")
     mainFrame.Name = "MainFrame"
-    mainFrame.Size = UDim2.new(0, 920, 0, 580)
-    mainFrame.Position = UDim2.new(0.5, -460, 0.5, -290)
+    mainFrame.Size = UDim2.new(0, 940, 0, 600)
+    mainFrame.Position = UDim2.new(0.5, -470, 0.5, -300)
     mainFrame.BackgroundColor3 = Theme.Colors.BgWindow
+    mainFrame.BackgroundTransparency = 0.05
     mainFrame.BorderSizePixel = 0
     mainFrame.Visible = true
     mainFrame.ClipsDescendants = true
     mainFrame.Parent = screenGui
     Components.createCorner(mainFrame, Theme.Corners.Window)
-    Components.createStroke(mainFrame, Theme.Colors.Border, 1.5)
+    Components.createStroke(mainFrame, Theme.Colors.Border, 1.5, 0.2)
 
-    -- Header / Titlebar (VSCode Top Bar Style)
+    -- Header / Titlebar with Gradient Banner
     local header = Instance.new("Frame")
     header.Size = UDim2.new(1, 0, 0, Theme.Sizes.HeaderHeight)
     header.BackgroundColor3 = Theme.Colors.BgHeader
     header.BorderSizePixel = 0
     header.Parent = mainFrame
-    Components.createPadding(header, 0, 0, 16, 16)
+    Components.createPadding(header, 0, 0, 18, 18)
 
     local logo = Instance.new("TextLabel")
-    logo.Text = "⚡ GameAnalyzer v6.0 IDE — " .. Env.ExecutorName
+    logo.Text = "⚡ GAMEANALYZER " .. Config.Version .. " — " .. Env.ExecutorName
     logo.Font = Theme.Fonts.Bold
     logo.TextSize = Theme.Sizes.TitleText
-    logo.TextColor3 = Theme.Colors.AccentLight
-    logo.Size = UDim2.new(0.5, 0, 1, 0)
+    logo.TextColor3 = Theme.Colors.Accent
+    logo.Size = UDim2.new(0.6, 0, 1, 0)
     logo.TextXAlignment = Enum.TextXAlignment.Left
     logo.BackgroundTransparency = 1
     logo.Parent = header
 
-    -- Controls (Minimize/Close)
+    -- Close Button
     local closeBtn = Instance.new("TextButton")
     closeBtn.Text = "✕"
     closeBtn.Font = Theme.Fonts.Bold
     closeBtn.TextSize = 13
     closeBtn.TextColor3 = Theme.Colors.TextSecondary
-    closeBtn.Size = UDim2.new(0, 26, 0, 26)
-    closeBtn.Position = UDim2.new(1, -26, 0.5, -13)
+    closeBtn.Size = UDim2.new(0, 28, 0, 28)
+    closeBtn.Position = UDim2.new(1, -28, 0.5, -14)
     closeBtn.BackgroundColor3 = Theme.Colors.BgCard
     closeBtn.BorderSizePixel = 0
     Components.createCorner(closeBtn, Theme.Corners.Badge)
@@ -590,39 +624,39 @@ local function launchIDE()
         if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end
     end)
 
-    -- Left Navigation Sidebar Pane
+    -- Sidebar Pane
     local sidebar = Instance.new("Frame")
     sidebar.Size = UDim2.new(0, Theme.Sizes.SidebarWidth, 1, -Theme.Sizes.HeaderHeight - Theme.Sizes.StatusBarHeight)
     sidebar.Position = UDim2.new(0, 0, 0, Theme.Sizes.HeaderHeight)
     sidebar.BackgroundColor3 = Theme.Colors.BgSidebar
     sidebar.BorderSizePixel = 0
     sidebar.Parent = mainFrame
-    Components.createPadding(sidebar, 12, 12, 10, 10)
+    Components.createPadding(sidebar, 14, 14, 12, 12)
 
     local sidebarLayout = Instance.new("UIListLayout")
     sidebarLayout.Padding = UDim.new(0, 6)
     sidebarLayout.Parent = sidebar
 
-    -- Main Viewport
+    -- Viewport Container
     local viewport = Instance.new("Frame")
     viewport.Size = UDim2.new(1, -Theme.Sizes.SidebarWidth, 1, -Theme.Sizes.HeaderHeight - Theme.Sizes.StatusBarHeight)
     viewport.Position = UDim2.new(0, Theme.Sizes.SidebarWidth, 0, Theme.Sizes.HeaderHeight)
     viewport.BackgroundColor3 = Theme.Colors.BgWindow
     viewport.BorderSizePixel = 0
     viewport.Parent = mainFrame
-    Components.createPadding(viewport, 14, 14, 16, 16)
+    Components.createPadding(viewport, 16, 16, 18, 18)
 
-    -- Bottom Status Bar
+    -- Status Bar
     local statusBar = Instance.new("Frame")
     statusBar.Size = UDim2.new(1, 0, 0, Theme.Sizes.StatusBarHeight)
     statusBar.Position = UDim2.new(0, 0, 1, -Theme.Sizes.StatusBarHeight)
     statusBar.BackgroundColor3 = Theme.Colors.BgSidebar
     statusBar.BorderSizePixel = 0
     statusBar.Parent = mainFrame
-    Components.createPadding(statusBar, 0, 0, 14, 14)
+    Components.createPadding(statusBar, 0, 0, 16, 16)
 
     local statusLabel = Instance.new("TextLabel")
-    statusLabel.Text = string.format("PlaceId: %d  |  Executor: %s  |  Toggle: [RightControl]", game.PlaceId, Env.ExecutorName)
+    statusLabel.Text = string.format("PlaceId: %d  |  Executor: %s  |  Atajo: [RightControl]", game.PlaceId, Env.ExecutorName)
     statusLabel.Font = Theme.Fonts.Main
     statusLabel.TextSize = Theme.Sizes.BodyText
     statusLabel.TextColor3 = Theme.Colors.TextMuted
@@ -631,9 +665,9 @@ local function launchIDE()
     statusLabel.BackgroundTransparency = 1
     statusLabel.Parent = statusBar
 
-    -- Tab System
+    -- Tabs Configuration
     local tabs = {
-        { Id = "Dashboard", Icon = "📊", Name = "Dashboard" },
+        { Id = "Dashboard", Icon = "📊", Name = "Dashboard Pro" },
         { Id = "Remotes",   Icon = "⚡", Name = "Remotes & Spy" },
         { Id = "Modules",   Icon = "📦", Name = "Módulos & Code" },
         { Id = "Jugador",   Icon = "👤", Name = "Jugador Stats" },
@@ -667,9 +701,9 @@ local function launchIDE()
             local scan = Scanner.scanRemotes()
             local vuln = Vulnerability.analyze()
 
-            -- Metrics Row
+            -- Metrics Row (Cards with Glassmorphism)
             local metricsFrame = Instance.new("Frame")
-            metricsFrame.Size = UDim2.new(1, 0, 0, 100)
+            metricsFrame.Size = UDim2.new(1, 0, 0, 105)
             metricsFrame.BackgroundTransparency = 1
             metricsFrame.Parent = frame
 
@@ -682,23 +716,15 @@ local function launchIDE()
             Components.createMetricCard(metricsFrame, "REMOTOS DE STAFF", #scan.Categorized.STAFF, #scan.Categorized.STAFF > 0 and "ALERTA" or "OK", #scan.Categorized.STAFF > 0 and Theme.Colors.Danger or Theme.Colors.Success, "🛡️")
             Components.createMetricCard(metricsFrame, "NIVEL DE RIESGO", vuln.RiskLevel, vuln.Score .. "/100", vuln.RiskLevel == "CRITICAL" and Theme.Colors.Danger or Theme.Colors.Success, "⚠️")
 
-            -- Place Details Panel
-            local detailsPanel = Instance.new("Frame")
-            detailsPanel.Size = UDim2.new(1, 0, 1, -114)
-            detailsPanel.Position = UDim2.new(0, 0, 0, 114)
-            detailsPanel.BackgroundColor3 = Theme.Colors.BgCard
-            detailsPanel.BorderSizePixel = 0
-            Components.createCorner(detailsPanel, Theme.Corners.Card)
-            Components.createPadding(detailsPanel, 14, 14, 16, 16)
-            Components.createStroke(detailsPanel, Theme.Colors.Border, 1)
-            detailsPanel.Parent = frame
+            -- Place Details Glass Panel
+            local detailsPanel = Components.createGlassCard(frame, UDim2.new(1, 0, 1, -120), UDim2.new(0, 0, 0, 120))
 
             local pTitle = Instance.new("TextLabel")
-            pTitle.Text = "📌 Información del Servidor & Sesión"
+            pTitle.Text = "📌 Detalles de Sesión & Servidor"
             pTitle.Font = Theme.Fonts.Bold
             pTitle.TextSize = Theme.Sizes.SubText
-            pTitle.TextColor3 = Theme.Colors.AccentLight
-            pTitle.Size = UDim2.new(1, 0, 0, 22)
+            pTitle.TextColor3 = Theme.Colors.Accent
+            pTitle.Size = UDim2.new(1, 0, 0, 24)
             pTitle.TextXAlignment = Enum.TextXAlignment.Left
             pTitle.BackgroundTransparency = 1
             pTitle.Parent = detailsPanel
@@ -726,8 +752,8 @@ local function launchIDE()
             pText.Font = Theme.Fonts.Code
             pText.TextSize = 13
             pText.TextColor3 = Theme.Colors.TextPrimary
-            pText.Size = UDim2.new(1, 0, 1, -30)
-            pText.Position = UDim2.new(0, 0, 0, 30)
+            pText.Size = UDim2.new(1, 0, 1, -32)
+            pText.Position = UDim2.new(0, 0, 0, 32)
             pText.TextXAlignment = Enum.TextXAlignment.Left
             pText.TextYAlignment = Enum.TextYAlignment.Top
             pText.BackgroundTransparency = 1
@@ -736,13 +762,12 @@ local function launchIDE()
         elseif tabId == "Remotes" then
             local scan = Scanner.scanRemotes()
 
-            -- Top Action Bar
             local actionBar = Instance.new("Frame")
-            actionBar.Size = UDim2.new(1, 0, 0, 36)
+            actionBar.Size = UDim2.new(1, 0, 0, 38)
             actionBar.BackgroundTransparency = 1
             actionBar.Parent = frame
 
-            local spyBtn = Components.createButton(RemoteSpy.Enabled and "⏹ Detener RemoteSpy" or "⚡ Iniciar Live RemoteSpy Hook", function(btn)
+            local spyBtn = Components.createGradientButton(RemoteSpy.Enabled and "⏹ Detener RemoteSpy" or "⚡ Iniciar Live RemoteSpy Hook", function(btn)
                 if RemoteSpy.Enabled then
                     RemoteSpy.stop()
                     Components.createToast(screenGui, "RemoteSpy", "Hook desactivado.", Theme.Colors.Warning)
@@ -750,13 +775,12 @@ local function launchIDE()
                     local ok = RemoteSpy.start()
                     Components.createToast(screenGui, "RemoteSpy", ok and "Hook activado (__namecall interceptando remotos)!" or "Error al enganchar metamétodo.", ok and Theme.Colors.Success or Theme.Colors.Danger)
                 end
-            end, actionBar, Theme.Colors.Accent)
-            spyBtn.Size = UDim2.new(0, 240, 1, 0)
+            end, actionBar, Theme.Colors.AccentGradient1, Theme.Colors.AccentGradient2)
+            spyBtn.Size = UDim2.new(0, 260, 1, 0)
 
-            -- Dual-Pane IDE Layout (Left: Remote List, Right: Code Preview)
             local listFrame = Instance.new("Frame")
-            listFrame.Size = UDim2.new(0.48, 0, 1, -44)
-            listFrame.Position = UDim2.new(0, 0, 0, 44)
+            listFrame.Size = UDim2.new(0.48, 0, 1, -48)
+            listFrame.Position = UDim2.new(0, 0, 0, 48)
             listFrame.BackgroundTransparency = 1
             listFrame.Parent = frame
 
@@ -774,8 +798,8 @@ local function launchIDE()
             layout.Parent = scroll
 
             local previewFrame = Instance.new("Frame")
-            previewFrame.Size = UDim2.new(0.5, 0, 1, -44)
-            previewFrame.Position = UDim2.new(0.5, 0, 0, 44)
+            previewFrame.Size = UDim2.new(0.5, 0, 1, -48)
+            previewFrame.Position = UDim2.new(0.5, 0, 0, 48)
             previewFrame.BackgroundColor3 = Theme.Colors.BgCode
             previewFrame.Parent = frame
 
@@ -783,11 +807,11 @@ local function launchIDE()
 
             for _, r in ipairs(scan.RemoteEvents) do
                 local card = Instance.new("Frame")
-                card.Size = UDim2.new(1, 0, 0, 40)
+                card.Size = UDim2.new(1, 0, 0, 42)
                 card.BackgroundColor3 = Theme.Colors.BgCard
                 card.BorderSizePixel = 0
                 Components.createCorner(card, Theme.Corners.Badge)
-                Components.createStroke(card, Theme.Colors.Border, 1)
+                Components.createStroke(card, Theme.Colors.Border, 1, 0.4)
 
                 local badgeColor = Config.CategoryColors[r.Category] or Theme.Colors.TextMuted
                 local badge = Components.createBadge(r.Category, badgeColor, card)
@@ -856,7 +880,7 @@ local function launchIDE()
                 card.BackgroundColor3 = Theme.Colors.BgCard
                 card.BorderSizePixel = 0
                 Components.createCorner(card, Theme.Corners.Badge)
-                Components.createStroke(card, Theme.Colors.Border, 1)
+                Components.createStroke(card, Theme.Colors.Border, 1, 0.4)
 
                 local l = Instance.new("TextLabel")
                 l.Text = "📦  " .. m.Name
@@ -896,14 +920,7 @@ local function launchIDE()
             layout.Padding = UDim.new(0, 12)
             layout.Parent = scroll
 
-            -- Player Header Card
-            local pCard = Instance.new("Frame")
-            pCard.Size = UDim2.new(1, 0, 0, 120)
-            pCard.BackgroundColor3 = Theme.Colors.BgCard
-            Components.createCorner(pCard, Theme.Corners.Card)
-            Components.createPadding(pCard, 14, 14, 16, 16)
-            Components.createStroke(pCard, Theme.Colors.Border, 1)
-            pCard.Parent = scroll
+            local pCard = Components.createGlassCard(scroll, UDim2.new(1, 0, 0, 110))
 
             local pName = Instance.new("TextLabel")
             pName.Text = "👤 Jugador: " .. (Env.LocalPlayer and Env.LocalPlayer.Name or "LocalPlayer")
@@ -932,7 +949,6 @@ local function launchIDE()
             pStats.BackgroundTransparency = 1
             pStats.Parent = pCard
 
-            -- Leaderstats Section
             local lsTitle = Instance.new("TextLabel")
             lsTitle.Text = "💰 Leaderstats & Currencies"
             lsTitle.Font = Theme.Fonts.Bold
@@ -945,11 +961,11 @@ local function launchIDE()
 
             for _, ls in ipairs(pData.Leaderstats) do
                 local cCard = Instance.new("Frame")
-                cCard.Size = UDim2.new(1, 0, 0, 38)
+                cCard.Size = UDim2.new(1, 0, 0, 40)
                 cCard.BackgroundColor3 = Theme.Colors.BgCard
                 Components.createCorner(cCard, Theme.Corners.Badge)
-                Components.createPadding(cCard, 0, 0, 12, 12)
-                Components.createStroke(cCard, Theme.Colors.Border, 1)
+                Components.createPadding(cCard, 0, 0, 14, 14)
+                Components.createStroke(cCard, Theme.Colors.Border, 1, 0.4)
 
                 local cName = Instance.new("TextLabel")
                 cName.Text = ls.Name
@@ -988,13 +1004,8 @@ local function launchIDE()
             layout.Padding = UDim.new(0, 10)
             layout.Parent = scroll
 
-            local auditCard = Instance.new("Frame")
-            auditCard.Size = UDim2.new(1, 0, 0, 70)
-            auditCard.BackgroundColor3 = Theme.Colors.BgCard
-            Components.createCorner(auditCard, Theme.Corners.Card)
-            Components.createPadding(auditCard, 12, 12, 16, 16)
+            local auditCard = Components.createGlassCard(scroll, UDim2.new(1, 0, 0, 70))
             Components.createStroke(auditCard, vuln.RiskLevel == "CRITICAL" and Theme.Colors.Danger or Theme.Colors.Success, 1.5)
-            auditCard.Parent = scroll
 
             local aTitle = Instance.new("TextLabel")
             aTitle.Text = "🛡️ Auditoría de Seguridad Automatizada — Riesgo: " .. vuln.RiskLevel
@@ -1008,11 +1019,11 @@ local function launchIDE()
 
             for _, f in ipairs(vuln.Findings) do
                 local fCard = Instance.new("Frame")
-                fCard.Size = UDim2.new(1, 0, 0, 76)
+                fCard.Size = UDim2.new(1, 0, 0, 78)
                 fCard.BackgroundColor3 = Theme.Colors.BgCard
                 Components.createCorner(fCard, Theme.Corners.Card)
                 Components.createPadding(fCard, 10, 10, 14, 14)
-                Components.createStroke(fCard, f.Severity == "CRITICAL" and Theme.Colors.Danger or Theme.Colors.Warning, 1)
+                Components.createStroke(fCard, f.Severity == "CRITICAL" and Theme.Colors.Danger or Theme.Colors.Warning, 1, 0.4)
 
                 local fTitle = Instance.new("TextLabel")
                 fTitle.Text = "[" .. f.Severity .. "]  " .. f.Title
@@ -1029,7 +1040,7 @@ local function launchIDE()
                 fDesc.Font = Theme.Fonts.Main
                 fDesc.TextSize = 12
                 fDesc.TextColor3 = Theme.Colors.TextSecondary
-                fDesc.Size = UDim2.new(1, 0, 0, 36)
+                fDesc.Size = UDim2.new(1, 0, 0, 38)
                 fDesc.Position = UDim2.new(0, 0, 0, 22)
                 fDesc.TextWrapped = true
                 fDesc.TextXAlignment = Enum.TextXAlignment.Left
@@ -1040,17 +1051,10 @@ local function launchIDE()
             end
 
         elseif tabId == "Exporter" then
-            local card = Instance.new("Frame")
-            card.Size = UDim2.new(0.6, 0, 0.5, 0)
-            card.Position = UDim2.new(0.2, 0, 0.25, 0)
-            card.BackgroundColor3 = Theme.Colors.BgCard
-            Components.createCorner(card, Theme.Corners.Card)
-            Components.createPadding(card, 20, 20, 24, 24)
-            Components.createStroke(card, Theme.Colors.Border, 1)
-            card.Parent = frame
+            local card = Components.createGlassCard(frame, UDim2.new(0.65, 0, 0.55, 0), UDim2.new(0.175, 0, 0.2, 0))
 
             local eTitle = Instance.new("TextLabel")
-            eTitle.Text = "💾 Exportar Informe de Análisis"
+            eTitle.Text = "💾 Exportar Informe de Análisis (.txt)"
             eTitle.Font = Theme.Fonts.Bold
             eTitle.TextSize = 16
             eTitle.TextColor3 = Theme.Colors.Accent
@@ -1071,7 +1075,7 @@ local function launchIDE()
             eDesc.BackgroundTransparency = 1
             eDesc.Parent = card
 
-            local btn = Components.createButton("💾 Generar y Guardar Dump (.txt)", function()
+            local btn = Components.createGradientButton("💾 Generar y Guardar Dump (.txt)", function()
                 local scan = Scanner.scanRemotes()
                 local vuln = Vulnerability.analyze()
                 local txt = string.format("====================================================\nGameAnalyzer Dump — Place: %d\nTotal Remotes: %d | Riesgo: %s (%d/100)\nFecha: %s\n====================================================\n", game.PlaceId, scan.TotalCount, vuln.RiskLevel, vuln.Score, os.date("%X"))
@@ -1080,9 +1084,9 @@ local function launchIDE()
                 end
                 local ok, path = Exporter.saveFile("Place_" .. game.PlaceId .. "_Dump.txt", txt)
                 Components.createToast(screenGui, ok and "Guardado Exitoso" or "Error al Guardar", ok and path or tostring(path), ok and Theme.Colors.Success or Theme.Colors.Danger)
-            end, card, Theme.Colors.Accent)
-            btn.Size = UDim2.new(1, 0, 0, 42)
-            btn.Position = UDim2.new(0, 0, 1, -42)
+            end, card, Theme.Colors.AccentGradient1, Theme.Colors.AccentGradient2)
+            btn.Size = UDim2.new(1, 0, 0, 44)
+            btn.Position = UDim2.new(0, 0, 1, -44)
         end
     end
 
@@ -1094,10 +1098,10 @@ local function launchIDE()
         btn.TextColor3 = Theme.Colors.TextSecondary
         btn.TextXAlignment = Enum.TextXAlignment.Left
         btn.BackgroundColor3 = Theme.Colors.BgSidebar
-        btn.Size = UDim2.new(1, 0, 0, 36)
+        btn.Size = UDim2.new(1, 0, 0, 38)
         btn.BorderSizePixel = 0
         Components.createCorner(btn, Theme.Corners.Button)
-        Components.createPadding(btn, 0, 0, 10, 10)
+        Components.createPadding(btn, 0, 0, 12, 12)
 
         btn.MouseButton1Click:Connect(function() loadTab(t.Id) end)
 
@@ -1111,11 +1115,12 @@ local function launchIDE()
         end
     end)
 
+    screenGui.Parent = parentGui
     loadTab("Dashboard")
-    Components.createToast(screenGui, "GameAnalyzer v6.0 IDE", "Cargado en Potassium! Presiona [RightControl] para ocultar/mostrar.", Theme.Colors.Accent)
+    Components.createToast(screenGui, "GameAnalyzer v6.0 IDE Pro", "Cargado con Glassmorphism & Gradients! Presiona [RightControl] para ocultar/mostrar.", Theme.Colors.Accent)
 end
 
-print("[GameAnalyzer v6.0 IDE] Iniciando en Potassium...")
+print("[GameAnalyzer v6.0 IDE Glass Pro] Iniciando en Potassium...")
 local success, err = pcall(launchIDE)
 if not success then
     warn("[GameAnalyzer Error de Inicio]:", err)

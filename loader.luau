@@ -1,36 +1,27 @@
 --[[
     ════════════════════════════════════════════════════════════════════
-    ⚡ GameAnalyzer v6.0 IDE Edition — GitHub Remote Loader
+    ⚡ GameAnalyzer v6.0 IDE Edition — Anti-Cache GitHub Remote Loader
     ════════════════════════════════════════════════════════════════════
-    Sustituye 'USERNAME/REPO' con tu usuario y repositorio de GitHub.
+    Evita la caché de Roblox HttpGet mediante query timestamp (?t=os.time())
     ════════════════════════════════════════════════════════════════════
 ]]
 
-local REPO_URL = "https://raw.githubusercontent.com/USERNAME/REPO/main/src/"
+local GITHUB_RAW_URL = "https://raw.githubusercontent.com/FardosESP/Roblx/main/lechon.luau?t=" .. tostring(os.time())
 
-local function loadRemoteModule(path)
-    local url = REPO_URL .. path
-    local ok, content = pcall(function()
-        return game:HttpGet(url)
-    end)
+print("[GameAnalyzer Anti-Cache] Descargando la versión más reciente desde GitHub...")
 
-    if not ok or not content then
-        error("[GameAnalyzer Loader] Error al cargar módulo desde GitHub: " .. path)
-    end
+local ok, scriptContent = pcall(function()
+    return game:HttpGet(GITHUB_RAW_URL)
+end)
 
-    local fn, err = loadstring(content)
-    if not fn then
-        error("[GameAnalyzer Loader] Error de sintaxis en módulo: " .. path .. " -> " .. tostring(err))
-    end
-
-    return fn()
+if not ok or not scriptContent or #scriptContent == 0 then
+    error("[GameAnalyzer Loader Error] No se pudo descargar desde GitHub.")
 end
 
-print("[GameAnalyzer] Cargando entorno modular desde GitHub...")
+local fn, err = loadstring(scriptContent)
+if not fn then
+    error("[GameAnalyzer Syntax Error] " .. tostring(err))
+end
 
--- Carga remota secuencial
-local Env = loadRemoteModule("Core/Env.luau")
-local Config = loadRemoteModule("Core/Config.luau")
-
-print("[GameAnalyzer] Entorno cargado. Iniciando GUI...")
-local Main = loadRemoteModule("Main.luau")
+print("[GameAnalyzer Loader] Ejecución iniciada.")
+fn()
