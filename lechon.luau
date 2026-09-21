@@ -480,8 +480,11 @@ end
 -- ═══════════════════════════════════════════════════════════════════
 local function launchIDE()
     local parentGui = nil
-    pcall(function() if Env.Services.CoreGui then parentGui = Env.Services.CoreGui end end)
-    if not parentGui then parentGui = Env.LocalPlayer:WaitForChild("PlayerGui") end
+    pcall(function() parentGui = Env.Services.CoreGui end)
+    if not parentGui or not pcall(function() return parentGui.Name end) then
+        local lp = Env.Services.Players.LocalPlayer
+        parentGui = lp and lp:FindFirstChildOfClass("PlayerGui") or game:GetService("CoreGui")
+    end
 
     if parentGui:FindFirstChild("GameAnalyzerIDE") then
         parentGui.GameAnalyzerIDE:Destroy()
@@ -490,12 +493,17 @@ local function launchIDE()
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "GameAnalyzerIDE"
     screenGui.ResetOnSpawn = false
+    screenGui.Enabled = true
+    screenGui.DisplayOrder = 999
+    screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
     local mainFrame = Instance.new("Frame")
+    mainFrame.Name = "MainFrame"
     mainFrame.Size = UDim2.new(0, 840, 0, 540)
     mainFrame.Position = UDim2.new(0.5, -420, 0.5, -270)
     mainFrame.BackgroundColor3 = Theme.Colors.BgMain
     mainFrame.BorderSizePixel = 0
+    mainFrame.Visible = true
     mainFrame.ClipsDescendants = true
     Components.createCorner(mainFrame, Theme.Corners.Window)
 
@@ -750,4 +758,7 @@ local function launchIDE()
 end
 
 print("[GameAnalyzer v6.0 IDE] Iniciando en Potassium...")
-pcall(launchIDE)
+local success, err = pcall(launchIDE)
+if not success then
+    warn("[GameAnalyzer Error de Inicio]:", err)
+end
