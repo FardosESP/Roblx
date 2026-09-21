@@ -556,21 +556,25 @@ end
 local function setupRemoteSpy()
     if Env.CAPS.hookmetamethod and Env.CAPS.getnamecallmethod and Env.CAPS.checkcaller then
         logTerminal("Initializing Network Auditor (RemoteSpy)...", Theme.Success)
-        local oldNamecall
-        oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
-            local method = getnamecallmethod()
-            if not checkcaller() and (method == "FireServer" or method == "InvokeServer") then
-                local args = {...}
-                local logStr = string.format("[Network] %s: %s", method, tostring(self))
-                if #args > 0 then logStr = logStr .. " | Args: " .. tostring(#args) end
-                
-                -- Spawn to avoid yielding or breaking the game thread
-                task.spawn(function()
-                    logTerminal(logStr, Theme.Accent)
-                end)
-            end
-            return oldNamecall(self, ...)
+        local success, err = pcall(function()
+            local oldNamecall
+            oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+                local method = getnamecallmethod()
+                if not checkcaller() and (method == "FireServer" or method == "InvokeServer") then
+                    local args = {...}
+                    local logStr = string.format("[Network] %s: %s", method, tostring(self))
+                    if #args > 0 then logStr = logStr .. " | Args: " .. tostring(#args) end
+                    
+                    task.spawn(function()
+                        logTerminal(logStr, Theme.Accent)
+                    end)
+                end
+                return oldNamecall(self, ...)
+            end)
         end)
+        if not success then
+            logTerminal("Network Auditor failed to hook: " .. tostring(err), Theme.Danger)
+        end
     else
         logTerminal("Network Auditor unavailable: executor lacks hookmetamethod/checkcaller.", Theme.Danger)
     end
@@ -580,25 +584,29 @@ end
 -- Logic: Deep Scanner
 ----------------------------------------------------------------
 local function runScanners()
-    logTerminal("Starting Deep Game Scan (Looking for LocalScripts & Modules)...", Theme.Success)
+    logTerminal("Starting Safe Game Scan...", Theme.Success)
     local count = 0
-    local targets = {workspace, Players, ReplicatedStorage, Lighting}
+    local targets = {ReplicatedStorage, player:WaitForChild("PlayerScripts"), Lighting}
     
-    for _, rootNode in ipairs(targets) do
-        -- Wrapped in pcall to avoid permission errors on protected services
+    local function scanNode(node)
+        if count >= 300 then return end
         pcall(function()
-            for _, v in ipairs(rootNode:GetDescendants()) do
+            for _, v in ipairs(node:GetChildren()) do
                 if v:IsA("ModuleScript") or v:IsA("LocalScript") then
                     local icon = v:IsA("ModuleScript") and "📄" or "📜"
                     createExplorerItem(v.Name .. (v:IsA("ModuleScript") and ".luau" or ".lua"), icon, v.ClassName, v)
                     count = count + 1
                 end
-                if count >= 300 then break end -- Limit to prevent massive lag spike
+                if count >= 300 then return end
+                scanNode(v) -- Recursively scan children safely
             end
         end)
-        if count >= 300 then break end
     end
-    logTerminal("Deep Scan complete. Found " .. tostring(count) .. " scripts.", Theme.TextSecondary)
+    
+    for _, rootNode in ipairs(targets) do
+        scanNode(rootNode)
+    end
+    logTerminal("Scan complete. Found " .. tostring(count) .. " scripts.", Theme.TextSecondary)
 end
 
 ----------------------------------------------------------------
