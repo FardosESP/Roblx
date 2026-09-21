@@ -131,7 +131,7 @@ local function highlightLuauCode(sourceText)
     local strings = {}
     s = s:gsub('("[^"]*")', function(match)
         table.insert(strings, match)
-        return "\0" .. #strings .. "\0"
+        return "%%STR_" .. #strings .. "%%"
     end)
     
     local keywords = {
@@ -146,7 +146,7 @@ local function highlightLuauCode(sourceText)
         s = s:gsub("%f[%w]" .. kw .. "%f[%W]", '<font color="' .. col .. '">' .. kw .. '</font>')
     end
     
-    s = s:gsub("%z(%d+)%z", function(id)
+    s = s:gsub("%%STR_(%d+)%%", function(id)
         return '<font color="#CE9178">' .. strings[tonumber(id)] .. '</font>'
     end)
     
