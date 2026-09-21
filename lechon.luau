@@ -504,6 +504,8 @@ local function launchIDE()
     stroke.Thickness = 1.5
     stroke.Parent = mainFrame
 
+    mainFrame.Parent = screenGui
+
     -- Header
     local header = Instance.new("Frame")
     header.Size = UDim2.new(1, 0, 0, Theme.Sizes.HeaderHeight)
