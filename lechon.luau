@@ -1,9 +1,15 @@
 --[[
     ════════════════════════════════════════════════════════════════════
-    ⚡ GameAnalyzer v6.0 — ULTRA IDE EDITION (Glassmorphism & Gradients)
+    ⚡ GameAnalyzer v6.0 — POTASSIUM / VSCODE IDE REPLICA (PRO EDITION)
     ════════════════════════════════════════════════════════════════════
     Diseñado para Potassium & Executors Luau Modernos.
-    Interfaz de Usuario Estilo IDE Next-Gen (Gradients, Glass, Neon Glows).
+    Réplica EXACTA de la interfaz visual de Potassium IDE / VSCode:
+      + Barra superior de pestañas de archivos (Dashboard.luau, Remotes.luau...)
+      + Explorador lateral de scripts con buscador "Filter scripts"
+      + Editor de Código con números de línea (Gutter 1, 2, 3...) y RichText Syntax Highlighting
+      + Consola terminal inferior (Console drawer con >_ CONSOLE)
+      + Barra de estado inferior (Ln 1, Col 1 | UTF-8 | Luau | 🟢 Connected)
+      + Botón de ejecución ▶ Run y ➔| Attach
     100% Autocontenido — ¡Cero dependencias!
     ════════════════════════════════════════════════════════════════════
 ]]
@@ -89,42 +95,38 @@ function Env.serialize(v, depth)
 end
 
 -- ═══════════════════════════════════════════════════════════════════
--- 2. PALETA DE COLOR Y GLASSMORPHISM (ULTRA MODERN CSS/WEB STYLE)
+-- 2. PALETA DE COLOR Y CONFIGURACIÓN POTASSIUM IDE
 -- ═══════════════════════════════════════════════════════════════════
 local Config = {
-    Version = "v6.0 Glass IDE Pro",
+    Version = "v6.0 Potassium IDE Replica",
     SubFolder = "ReverseKit",
     ToggleKey = Enum.KeyCode.RightControl,
 }
 
 Config.Theme = {
-    BgWindow      = Color3.fromRGB(15, 17, 23),       -- Deep Glass Dark
-    BgSidebar     = Color3.fromRGB(11, 13, 18),       -- Obsidian Sidebar
-    BgHeader      = Color3.fromRGB(20, 23, 31),       -- Header Bar
-    BgCard        = Color3.fromRGB(24, 28, 38),       -- Card Panel
-    BgCardHover   = Color3.fromRGB(34, 40, 54),       -- Hover Accent
-    BgCode        = Color3.fromRGB(10, 12, 16),       -- Editor Background
+    BgMain        = Color3.fromRGB(18, 18, 20),       -- Charcoal Dark #121214
+    BgSidebar     = Color3.fromRGB(14, 14, 16),       -- Explorer Sidebar #0e0e10
+    BgHeader      = Color3.fromRGB(24, 24, 28),       -- Top Bar
+    BgTabs        = Color3.fromRGB(20, 20, 24),       -- File Tabs Bar
+    BgCard        = Color3.fromRGB(26, 26, 32),       -- Panel / Card
+    BgInput       = Color3.fromRGB(22, 22, 26),       -- Search Input Box
+    BgCode        = Color3.fromRGB(12, 12, 14),       -- Code Editor BG
+    BgConsole     = Color3.fromRGB(10, 10, 12),       -- Console Drawer BG
 
-    -- Neon Accent Gradients (Amber / Gold / Cyan / Purple Glows)
-    Accent        = Color3.fromRGB(245, 158, 11),     -- Amber Glow #f59e0b
-    AccentGradient1 = Color3.fromRGB(245, 158, 11),   -- Gold
-    AccentGradient2 = Color3.fromRGB(217, 119, 6),    -- Amber
-    PurpleGradient1 = Color3.fromRGB(168, 85, 247),   -- Purple Glow
-    PurpleGradient2 = Color3.fromRGB(126, 34, 206),
+    Accent        = Color3.fromRGB(255, 255, 255),    -- White Run Accent
+    AccentBlue    = Color3.fromRGB(59, 130, 246),     -- Blue Accent
+    AccentAmber   = Color3.fromRGB(245, 158, 11),     -- Amber Accent
 
     Success       = Color3.fromRGB(34, 197, 94),
     Warning       = Color3.fromRGB(245, 158, 11),
     Danger        = Color3.fromRGB(239, 68, 68),
-    Info          = Color3.fromRGB(59, 130, 246),
-    Cyan          = Color3.fromRGB(6, 182, 212),
 
-    TextPrimary   = Color3.fromRGB(248, 250, 252),
-    TextSecondary = Color3.fromRGB(148, 163, 184),
-    TextMuted     = Color3.fromRGB(100, 116, 139),
-    TextCode      = Color3.fromRGB(226, 232, 240),
+    TextPrimary   = Color3.fromRGB(243, 244, 246),
+    TextSecondary = Color3.fromRGB(156, 163, 175),
+    TextMuted     = Color3.fromRGB(107, 114, 128),
+    TextCode      = Color3.fromRGB(229, 231, 235),
 
-    Border        = Color3.fromRGB(45, 55, 72),
-    BorderGlow    = Color3.fromRGB(245, 158, 11),
+    Border        = Color3.fromRGB(38, 38, 44),
 }
 
 Config.CategoryColors = {
@@ -145,12 +147,12 @@ Config.CategoryColors = {
 local Theme = {
     Colors = Config.Theme,
     Fonts = { Main = Enum.Font.BuilderSans, Bold = Enum.Font.BuilderSansBold, Code = Enum.Font.Code },
-    Sizes = { TitleText = 15, SubText = 13, BodyText = 12, CodeText = 12, BadgeText = 10, SidebarWidth = 210, HeaderHeight = 46, StatusBarHeight = 28 },
-    Corners = { Window = UDim.new(0, 12), Card = UDim.new(0, 8), Button = UDim.new(0, 6), Badge = UDim.new(0, 4) },
+    Sizes = { TitleText = 14, SubText = 12, BodyText = 11, CodeText = 12, BadgeText = 10, SidebarWidth = 220, HeaderHeight = 42, StatusBarHeight = 24 },
+    Corners = { Window = UDim.new(0, 8), Card = UDim.new(0, 6), Button = UDim.new(0, 5), Badge = UDim.new(0, 4) },
 }
 
 -- ═══════════════════════════════════════════════════════════════════
--- 3. ESCÁNERES Y SERVICIOS
+-- 3. SERVICIOS Y ESCÁNERES
 -- ═══════════════════════════════════════════════════════════════════
 local Scanner = {}
 Scanner.RemoteCategories = {
@@ -332,8 +334,49 @@ function Exporter.copyToClipboard(text)
     return false, "setclipboard no disponible"
 end
 
+-- Syntax Highlighting Engine for Code Viewer
+local function highlightLuauCode(sourceText)
+    if not sourceText or type(sourceText) ~= "string" then return "" end
+
+    local lines = string.split(sourceText, "\n")
+    local highlightedLines = {}
+
+    for idx, line in ipairs(lines) do
+        local safeLine = line:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;")
+
+        -- Comments
+        if safeLine:find("^%s*%-%-") then
+            safeLine = '<font color="#64748b">' .. safeLine .. '</font>'
+        else
+            -- Keywords
+            safeLine = safeLine:gsub("%f[%a](local)%f[%A]", '<font color="#f43f5e">local</font>')
+            safeLine = safeLine:gsub("%f[%a](function)%f[%A]", '<font color="#f43f5e">function</font>')
+            safeLine = safeLine:gsub("%f[%a](end)%f[%A]", '<font color="#f43f5e">end</font>')
+            safeLine = safeLine:gsub("%f[%a](return)%f[%A]", '<font color="#f43f5e">return</font>')
+            safeLine = safeLine:gsub("%f[%a](if)%f[%A]", '<font color="#f43f5e">if</font>')
+            safeLine = safeLine:gsub("%f[%a](then)%f[%A]", '<font color="#f43f5e">then</font>')
+            safeLine = safeLine:gsub("%f[%a](else)%f[%A]", '<font color="#f43f5e">else</font>')
+            safeLine = safeLine:gsub("%f[%a](for)%f[%A]", '<font color="#f43f5e">for</font>')
+            safeLine = safeLine:gsub("%f[%a](do)%f[%A]", '<font color="#f43f5e">do</font>')
+
+            -- Builtins & Globals
+            safeLine = safeLine:gsub("%f[%a](game)%f[%A]", '<font color="#3b82f6">game</font>')
+            safeLine = safeLine:gsub("%f[%a](GetService)%f[%A]", '<font color="#a855f7">GetService</font>')
+            safeLine = safeLine:gsub("%f[%a](FireServer)%f[%A]", '<font color="#38bdf8">FireServer</font>')
+            safeLine = safeLine:gsub("%f[%a](InvokeServer)%f[%A]", '<font color="#38bdf8">InvokeServer</font>')
+
+            -- Strings
+            safeLine = safeLine:gsub('(".-")', '<font color="#10b981">%1</font>')
+        end
+
+        table.insert(highlightedLines, safeLine)
+    end
+
+    return table.concat(highlightedLines, "\n")
+end
+
 -- ═══════════════════════════════════════════════════════════════════
--- 4. COMPONENTES VISUALES GLASSMORPHISM & GRADIENTES (WEB/CSS STYLE)
+-- 4. POTASSIUM / VSCODE COMPONENTES DE INTERFAZ
 -- ═══════════════════════════════════════════════════════════════════
 local Components = {}
 
@@ -352,50 +395,24 @@ function Components.createPadding(parent, top, bottom, left, right)
     return p
 end
 
-function Components.createStroke(parent, color, thickness, transparency)
+function Components.createStroke(parent, color, thickness)
     local s = Instance.new("UIStroke")
     s.Color = color or Theme.Colors.Border
     s.Thickness = thickness or 1
-    s.Transparency = transparency or 0
     s.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     s.Parent = parent
     return s
 end
 
-function Components.createGradient(parent, c1, c2, rotation)
-    local g = Instance.new("UIGradient")
-    g.Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, c1),
-        ColorSequenceKeypoint.new(1, c2),
-    })
-    g.Rotation = rotation or 45
-    g.Parent = parent
-    return g
-end
-
-function Components.createGlassCard(parent, size, pos)
-    local card = Instance.new("Frame")
-    card.Size = size or UDim2.new(1, 0, 0, 100)
-    if pos then card.Position = pos end
-    card.BackgroundColor3 = Theme.Colors.BgCard
-    card.BackgroundTransparency = 0.15
-    card.BorderSizePixel = 0
-    Components.createCorner(card, Theme.Corners.Card)
-    Components.createPadding(card, 12, 12, 16, 16)
-    Components.createStroke(card, Theme.Colors.Border, 1, 0.3)
-    if parent then card.Parent = parent end
-    return card
-end
-
 function Components.createBadge(text, color, parent)
     local frame = Instance.new("Frame")
-    frame.BackgroundColor3 = color or Theme.Colors.Accent
-    frame.BackgroundTransparency = 0.8
+    frame.BackgroundColor3 = color or Theme.Colors.AccentAmber
+    frame.BackgroundTransparency = 0.85
     frame.BorderSizePixel = 0
     frame.AutomaticSize = Enum.AutomaticSize.XY
     Components.createCorner(frame, Theme.Corners.Badge)
-    Components.createPadding(frame, 3, 3, 8, 8)
-    Components.createStroke(frame, color or Theme.Colors.Accent, 1, 0.4)
+    Components.createPadding(frame, 2, 2, 6, 6)
+    Components.createStroke(frame, color or Theme.Colors.AccentAmber, 1)
 
     local label = Instance.new("TextLabel")
     label.Text = string.upper(text)
@@ -410,131 +427,112 @@ function Components.createBadge(text, color, parent)
     return frame
 end
 
-function Components.createGradientButton(text, onClick, parent, color1, color2)
+function Components.createButton(text, onClick, parent, color, textColor)
     local btn = Instance.new("TextButton")
     btn.Text = text
     btn.Font = Theme.Fonts.Bold
     btn.TextSize = Theme.Sizes.BodyText
-    btn.TextColor3 = Theme.Colors.TextPrimary
-    btn.BackgroundColor3 = color1 or Theme.Colors.Accent
+    btn.TextColor3 = textColor or Theme.Colors.TextPrimary
+    btn.BackgroundColor3 = color or Theme.Colors.BgCard
     btn.BorderSizePixel = 0
-    btn.Size = UDim2.new(0, 140, 0, 36)
+    btn.Size = UDim2.new(0, 95, 0, 28)
     btn.AutoButtonColor = true
     Components.createCorner(btn, Theme.Corners.Button)
-    Components.createPadding(btn, 4, 4, 14, 14)
-    Components.createGradient(btn, color1 or Theme.Colors.AccentGradient1, color2 or Theme.Colors.AccentGradient2, 90)
-    Components.createStroke(btn, Color3.fromRGB(255, 255, 255), 1, 0.7)
+    Components.createPadding(btn, 2, 2, 8, 8)
+    Components.createStroke(btn, Theme.Colors.Border, 1)
 
     if onClick then btn.MouseButton1Click:Connect(onClick) end
     if parent then btn.Parent = parent end
     return btn
 end
 
-function Components.createMetricCard(parent, title, value, badgeText, badgeColor, icon)
-    local card = Components.createGlassCard(parent, UDim2.new(0.318, 0, 0, 105))
-
-    local topRow = Instance.new("Frame")
-    topRow.Size = UDim2.new(1, 0, 0, 22)
-    topRow.BackgroundTransparency = 1
-    topRow.Parent = card
-
-    local tLabel = Instance.new("TextLabel")
-    tLabel.Text = (icon or "") .. "  " .. title
-    tLabel.Font = Theme.Fonts.Bold
-    tLabel.TextSize = Theme.Sizes.BodyText
-    tLabel.TextColor3 = Theme.Colors.TextSecondary
-    tLabel.Size = UDim2.new(0.65, 0, 1, 0)
-    tLabel.TextXAlignment = Enum.TextXAlignment.Left
-    tLabel.BackgroundTransparency = 1
-    tLabel.Parent = topRow
-
-    if badgeText then
-        local b = Components.createBadge(badgeText, badgeColor or Theme.Colors.Accent, topRow)
-        b.Position = UDim2.new(1, -b.AbsoluteSize.X, 0, 0)
-    end
-
-    local vLabel = Instance.new("TextLabel")
-    vLabel.Text = tostring(value)
-    vLabel.Font = Theme.Fonts.Bold
-    vLabel.TextSize = 26
-    vLabel.TextColor3 = badgeColor or Theme.Colors.TextPrimary
-    vLabel.Size = UDim2.new(1, 0, 0, 38)
-    vLabel.Position = UDim2.new(0, 0, 0, 30)
-    vLabel.TextXAlignment = Enum.TextXAlignment.Left
-    vLabel.BackgroundTransparency = 1
-    vLabel.Parent = card
-
-    -- Subtle Gradient Glow Line at bottom
-    local line = Instance.new("Frame")
-    line.Size = UDim2.new(1, 0, 0, 2)
-    line.Position = UDim2.new(0, 0, 1, -2)
-    line.BackgroundColor3 = badgeColor or Theme.Colors.Accent
-    line.BorderSizePixel = 0
-    Components.createCorner(line, UDim.new(0, 1))
-    Components.createGradient(line, badgeColor or Theme.Colors.Accent, Theme.Colors.BgCard, 0)
-    line.Parent = card
-
-    return card
-end
-
-function Components.createCodeViewer(codeText, parent)
-    local container = Instance.new("Frame")
-    container.Size = UDim2.new(1, 0, 1, 0)
-    container.BackgroundColor3 = Theme.Colors.BgCode
-    container.BorderSizePixel = 0
-    Components.createCorner(container, Theme.Corners.Card)
-    Components.createStroke(container, Theme.Colors.Border, 1, 0.4)
+-- IDE Code Editor with Gutter Line Numbers and Syntax Highlighting
+function Components.createCodeEditor(rawCodeText, parent)
+    local editorContainer = Instance.new("Frame")
+    editorContainer.Size = UDim2.new(1, 0, 1, 0)
+    editorContainer.BackgroundColor3 = Theme.Colors.BgCode
+    editorContainer.BorderSizePixel = 0
+    Components.createCorner(editorContainer, Theme.Corners.Card)
+    Components.createStroke(editorContainer, Theme.Colors.Border, 1)
 
     local scroll = Instance.new("ScrollingFrame")
     scroll.Size = UDim2.new(1, 0, 1, 0)
     scroll.BackgroundTransparency = 1
-    scroll.ScrollBarThickness = 6
-    scroll.ScrollBarImageColor3 = Theme.Colors.Accent
+    scroll.ScrollBarThickness = 5
+    scroll.ScrollBarImageColor3 = Color3.fromRGB(80, 80, 95)
     scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
     scroll.AutomaticCanvasSize = Enum.AutomaticSize.XY
-    scroll.Parent = container
+    scroll.Parent = editorContainer
 
-    Components.createPadding(scroll, 12, 12, 14, 14)
+    local lines = string.split(rawCodeText or "", "\n")
+    local lineNums = {}
+    for i = 1, #lines do table.insert(lineNums, tostring(i)) end
+    local lineNumStr = table.concat(lineNums, "\n")
 
-    local label = Instance.new("TextLabel")
-    label.Text = codeText or ""
-    label.Font = Theme.Fonts.Code
-    label.TextSize = Theme.Sizes.CodeText
-    label.TextColor3 = Theme.Colors.TextCode
-    label.TextXAlignment = Enum.TextXAlignment.Left
-    label.TextYAlignment = Enum.TextYAlignment.Top
-    label.BackgroundTransparency = 1
-    label.AutomaticSize = Enum.AutomaticSize.XY
-    label.Parent = scroll
+    -- Gutter (Line Numbers column)
+    local gutter = Instance.new("TextLabel")
+    gutter.Text = lineNumStr
+    gutter.Font = Theme.Fonts.Code
+    gutter.TextSize = Theme.Sizes.CodeText
+    gutter.TextColor3 = Theme.Colors.TextMuted
+    gutter.TextXAlignment = Enum.TextXAlignment.Right
+    gutter.TextYAlignment = Enum.TextYAlignment.Top
+    gutter.Position = UDim2.new(0, 10, 0, 10)
+    gutter.Size = UDim2.new(0, 32, 0, 0)
+    gutter.AutomaticSize = Enum.AutomaticSize.XY
+    gutter.BackgroundTransparency = 1
+    gutter.Parent = scroll
 
-    if parent then container.Parent = parent end
-    return container
+    -- Vertical Gutter Divider
+    local divider = Instance.new("Frame")
+    divider.Size = UDim2.new(0, 1, 1, 0)
+    divider.Position = UDim2.new(0, 48, 0, 0)
+    divider.BackgroundColor3 = Theme.Colors.Border
+    divider.BorderSizePixel = 0
+    divider.Parent = scroll
+
+    -- Code Label (RichText Syntax Highlighted)
+    local codeLabel = Instance.new("TextLabel")
+    codeLabel.RichText = true
+    codeLabel.Text = highlightLuauCode(rawCodeText)
+    codeLabel.Font = Theme.Fonts.Code
+    codeLabel.TextSize = Theme.Sizes.CodeText
+    codeLabel.TextColor3 = Theme.Colors.TextCode
+    codeLabel.TextXAlignment = Enum.TextXAlignment.Left
+    codeLabel.TextYAlignment = Enum.TextYAlignment.Top
+    codeLabel.Position = UDim2.new(0, 58, 0, 10)
+    codeLabel.Size = UDim2.new(1, -68, 0, 0)
+    codeLabel.AutomaticSize = Enum.AutomaticSize.XY
+    codeLabel.BackgroundTransparency = 1
+    codeLabel.Parent = scroll
+
+    if parent then editorContainer.Parent = parent end
+    return editorContainer
 end
 
 function Components.createToast(parentGui, title, msg, color)
     local toast = Instance.new("Frame")
-    toast.Size = UDim2.new(0, 330, 0, 68)
-    toast.Position = UDim2.new(1, -350, 1, -88)
+    toast.Size = UDim2.new(0, 310, 0, 60)
+    toast.Position = UDim2.new(1, -330, 1, -80)
     toast.BackgroundColor3 = Theme.Colors.BgCard
     toast.BorderSizePixel = 0
     toast.ZIndex = 9999
     Components.createCorner(toast, Theme.Corners.Card)
-    Components.createPadding(toast, 12, 12, 16, 16)
-    Components.createStroke(toast, color or Theme.Colors.Accent, 1.5)
+    Components.createPadding(toast, 8, 8, 12, 12)
+    Components.createStroke(toast, color or Theme.Colors.AccentAmber, 1.5)
 
     local t = Instance.new("TextLabel")
-    t.Text = title; t.Font = Theme.Fonts.Bold; t.TextSize = Theme.Sizes.SubText; t.TextColor3 = color or Theme.Colors.Accent; t.Size = UDim2.new(1, 0, 0, 20); t.BackgroundTransparency = 1; t.Parent = toast
+    t.Text = title; t.Font = Theme.Fonts.Bold; t.TextSize = Theme.Sizes.SubText; t.TextColor3 = color or Theme.Colors.AccentAmber; t.Size = UDim2.new(1, 0, 0, 18); t.BackgroundTransparency = 1; t.Parent = toast
     local m = Instance.new("TextLabel")
-    m.Text = msg; m.Font = Theme.Fonts.Main; m.TextSize = Theme.Sizes.BodyText; m.TextColor3 = Theme.Colors.TextSecondary; m.Size = UDim2.new(1, 0, 0, 24); m.Position = UDim2.new(0,0,0,24); m.BackgroundTransparency = 1; m.Parent = toast
+    m.Text = msg; m.Font = Theme.Fonts.Main; m.TextSize = Theme.Sizes.BodyText; m.TextColor3 = Theme.Colors.TextSecondary; m.Size = UDim2.new(1, 0, 0, 24); m.Position = UDim2.new(0,0,0,20); m.BackgroundTransparency = 1; m.Parent = toast
     toast.Parent = parentGui
-    task.delay(3.5, function() toast:Destroy() end)
+    task.delay(3, function() toast:Destroy() end)
 end
 
 -- ═══════════════════════════════════════════════════════════════════
--- 5. CONSTRUCTOR DE INTERFAZ NEXT-GEN (GLASS LAUNCHER)
+-- 5. CONSTRUCTOR POTASSIUM IDE REPLICA (EXACT MATCH LAUNCHER)
 -- ═══════════════════════════════════════════════════════════════════
 local function launchIDE()
-    -- Clean previous instances across CoreGui AND PlayerGui to avoid old cache!
     pcall(function()
         if Env.Services.CoreGui:FindFirstChild("GameAnalyzerIDE") then
             Env.Services.CoreGui.GameAnalyzerIDE:Destroy()
@@ -561,50 +559,80 @@ local function launchIDE()
     screenGui.DisplayOrder = 9999
     screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-    -- Main IDE Glass Container Window
+    -- Main Window Frame (Potassium Window Styling)
     local mainFrame = Instance.new("Frame")
     mainFrame.Name = "MainFrame"
-    mainFrame.Size = UDim2.new(0, 940, 0, 600)
-    mainFrame.Position = UDim2.new(0.5, -470, 0.5, -300)
-    mainFrame.BackgroundColor3 = Theme.Colors.BgWindow
-    mainFrame.BackgroundTransparency = 0.05
+    mainFrame.Size = UDim2.new(0, 960, 0, 600)
+    mainFrame.Position = UDim2.new(0.5, -480, 0.5, -300)
+    mainFrame.BackgroundColor3 = Theme.Colors.BgMain
     mainFrame.BorderSizePixel = 0
     mainFrame.Visible = true
     mainFrame.ClipsDescendants = true
     mainFrame.Parent = screenGui
     Components.createCorner(mainFrame, Theme.Corners.Window)
-    Components.createStroke(mainFrame, Theme.Colors.Border, 1.5, 0.2)
+    Components.createStroke(mainFrame, Theme.Colors.Border, 1)
 
-    -- Header / Titlebar with Gradient Banner
+    -- Top Header Bar (Title + Run / Attach Action Buttons)
     local header = Instance.new("Frame")
     header.Size = UDim2.new(1, 0, 0, Theme.Sizes.HeaderHeight)
     header.BackgroundColor3 = Theme.Colors.BgHeader
     header.BorderSizePixel = 0
     header.Parent = mainFrame
-    Components.createPadding(header, 0, 0, 18, 18)
+    Components.createPadding(header, 0, 0, 14, 14)
 
     local logo = Instance.new("TextLabel")
-    logo.Text = "⚡ GAMEANALYZER " .. Config.Version .. " — " .. Env.ExecutorName
+    logo.Text = "⚡ GameAnalyzer v6.0 IDE — " .. Env.ExecutorName
     logo.Font = Theme.Fonts.Bold
     logo.TextSize = Theme.Sizes.TitleText
-    logo.TextColor3 = Theme.Colors.Accent
-    logo.Size = UDim2.new(0.6, 0, 1, 0)
+    logo.TextColor3 = Theme.Colors.TextPrimary
+    logo.Size = UDim2.new(0.4, 0, 1, 0)
     logo.TextXAlignment = Enum.TextXAlignment.Left
     logo.BackgroundTransparency = 1
     logo.Parent = header
 
-    -- Close Button
+    -- Action Buttons (Run / Attach / Close)
+    local actions = Instance.new("Frame")
+    actions.Size = UDim2.new(0, 260, 1, 0)
+    actions.Position = UDim2.new(1, -260, 0, 0)
+    actions.BackgroundTransparency = 1
+    actions.Parent = header
+
+    local runBtn = Instance.new("TextButton")
+    runBtn.Text = "▶  Run"
+    runBtn.Font = Theme.Fonts.Bold
+    runBtn.TextSize = 12
+    runBtn.TextColor3 = Color3.fromRGB(15, 15, 18)
+    runBtn.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+    runBtn.Size = UDim2.new(0, 75, 0, 26)
+    runBtn.Position = UDim2.new(0, 40, 0.5, -13)
+    runBtn.BorderSizePixel = 0
+    Components.createCorner(runBtn, Theme.Corners.Button)
+    runBtn.Parent = actions
+
+    local attachBtn = Instance.new("TextButton")
+    attachBtn.Text = "➔| Attach"
+    attachBtn.Font = Theme.Fonts.Bold
+    attachBtn.TextSize = 12
+    attachBtn.TextColor3 = Theme.Colors.TextPrimary
+    attachBtn.BackgroundColor3 = Theme.Colors.BgCard
+    attachBtn.Size = UDim2.new(0, 85, 0, 26)
+    attachBtn.Position = UDim2.new(0, 122, 0.5, -13)
+    attachBtn.BorderSizePixel = 0
+    Components.createCorner(attachBtn, Theme.Corners.Button)
+    Components.createStroke(attachBtn, Theme.Colors.Border, 1)
+    attachBtn.Parent = actions
+
     local closeBtn = Instance.new("TextButton")
     closeBtn.Text = "✕"
     closeBtn.Font = Theme.Fonts.Bold
-    closeBtn.TextSize = 13
+    closeBtn.TextSize = 14
     closeBtn.TextColor3 = Theme.Colors.TextSecondary
-    closeBtn.Size = UDim2.new(0, 28, 0, 28)
-    closeBtn.Position = UDim2.new(1, -28, 0.5, -14)
+    closeBtn.Size = UDim2.new(0, 26, 0, 26)
+    closeBtn.Position = UDim2.new(1, -26, 0.5, -13)
     closeBtn.BackgroundColor3 = Theme.Colors.BgCard
     closeBtn.BorderSizePixel = 0
     Components.createCorner(closeBtn, Theme.Corners.Badge)
-    closeBtn.Parent = header
+    closeBtn.Parent = actions
     closeBtn.MouseButton1Click:Connect(function() mainFrame.Visible = not mainFrame.Visible end)
 
     -- Header Dragging
@@ -624,70 +652,148 @@ local function launchIDE()
         if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end
     end)
 
-    -- Sidebar Pane
+    -- Left Sidebar Explorer Pane (Potassium Style Explorer)
     local sidebar = Instance.new("Frame")
     sidebar.Size = UDim2.new(0, Theme.Sizes.SidebarWidth, 1, -Theme.Sizes.HeaderHeight - Theme.Sizes.StatusBarHeight)
     sidebar.Position = UDim2.new(0, 0, 0, Theme.Sizes.HeaderHeight)
     sidebar.BackgroundColor3 = Theme.Colors.BgSidebar
     sidebar.BorderSizePixel = 0
     sidebar.Parent = mainFrame
-    Components.createPadding(sidebar, 14, 14, 12, 12)
+    Components.createPadding(sidebar, 10, 10, 10, 10)
+
+    -- Sidebar Title & Search Filter
+    local expTitle = Instance.new("TextLabel")
+    expTitle.Text = "Explorer"
+    expTitle.Font = Theme.Fonts.Bold
+    expTitle.TextSize = 13
+    expTitle.TextColor3 = Theme.Colors.TextPrimary
+    expTitle.Size = UDim2.new(1, 0, 0, 20)
+    expTitle.TextXAlignment = Enum.TextXAlignment.Left
+    expTitle.BackgroundTransparency = 1
+    expTitle.Parent = sidebar
+
+    local searchBox = Instance.new("TextBox")
+    searchBox.PlaceholderText = "🔍 Filter scripts"
+    searchBox.PlaceholderColor3 = Theme.Colors.TextMuted
+    searchBox.Text = ""
+    searchBox.Font = Theme.Fonts.Main
+    searchBox.TextSize = 11
+    searchBox.TextColor3 = Theme.Colors.TextPrimary
+    searchBox.BackgroundColor3 = Theme.Colors.BgInput
+    searchBox.Size = UDim2.new(1, 0, 0, 26)
+    searchBox.Position = UDim2.new(0, 0, 0, 24)
+    searchBox.BorderSizePixel = 0
+    searchBox.TextXAlignment = Enum.TextXAlignment.Left
+    Components.createCorner(searchBox, Theme.Corners.Button)
+    Components.createPadding(searchBox, 0, 0, 8, 8)
+    Components.createStroke(searchBox, Theme.Colors.Border, 1)
+    searchBox.Parent = sidebar
+
+    local sectionHeader = Instance.new("TextLabel")
+    sectionHeader.Text = "∨  SCRIPTS"
+    sectionHeader.Font = Theme.Fonts.Bold
+    sectionHeader.TextSize = 10
+    sectionHeader.TextColor3 = Theme.Colors.TextMuted
+    sectionHeader.Size = UDim2.new(1, 0, 0, 18)
+    sectionHeader.Position = UDim2.new(0, 0, 0, 56)
+    sectionHeader.TextXAlignment = Enum.TextXAlignment.Left
+    sectionHeader.BackgroundTransparency = 1
+    sectionHeader.Parent = sidebar
+
+    local scrollSidebar = Instance.new("ScrollingFrame")
+    scrollSidebar.Size = UDim2.new(1, 0, 1, -78)
+    scrollSidebar.Position = UDim2.new(0, 0, 0, 78)
+    scrollSidebar.BackgroundTransparency = 1
+    scrollSidebar.ScrollBarThickness = 3
+    scrollSidebar.Parent = sidebar
 
     local sidebarLayout = Instance.new("UIListLayout")
-    sidebarLayout.Padding = UDim.new(0, 6)
-    sidebarLayout.Parent = sidebar
+    sidebarLayout.Padding = UDim.new(0, 3)
+    sidebarLayout.Parent = scrollSidebar
 
-    -- Viewport Container
+    -- Center File Tab Bar & Main Editor Viewport
+    local mainArea = Instance.new("Frame")
+    mainArea.Size = UDim2.new(1, -Theme.Sizes.SidebarWidth, 1, -Theme.Sizes.HeaderHeight - Theme.Sizes.StatusBarHeight)
+    mainArea.Position = UDim2.new(0, Theme.Sizes.SidebarWidth, 0, Theme.Sizes.HeaderHeight)
+    mainArea.BackgroundColor3 = Theme.Colors.BgMain
+    mainArea.BorderSizePixel = 0
+    mainArea.Parent = mainFrame
+
+    -- File Tabs Bar (Horizontal Tabs like Potassium)
+    local tabBar = Instance.new("Frame")
+    tabBar.Size = UDim2.new(1, 0, 0, 32)
+    tabBar.BackgroundColor3 = Theme.Colors.BgTabs
+    tabBar.BorderSizePixel = 0
+    tabBar.Parent = mainArea
+    Components.createPadding(tabBar, 0, 0, 6, 6)
+
+    local tabLayout = Instance.new("UIListLayout")
+    tabLayout.FillDirection = Enum.FillDirection.Horizontal
+    tabLayout.Padding = UDim.new(0, 4)
+    tabLayout.Parent = tabBar
+
+    -- Editor & Console Viewport Frame
     local viewport = Instance.new("Frame")
-    viewport.Size = UDim2.new(1, -Theme.Sizes.SidebarWidth, 1, -Theme.Sizes.HeaderHeight - Theme.Sizes.StatusBarHeight)
-    viewport.Position = UDim2.new(0, Theme.Sizes.SidebarWidth, 0, Theme.Sizes.HeaderHeight)
-    viewport.BackgroundColor3 = Theme.Colors.BgWindow
-    viewport.BorderSizePixel = 0
-    viewport.Parent = mainFrame
-    Components.createPadding(viewport, 16, 16, 18, 18)
+    viewport.Size = UDim2.new(1, 0, 1, -32)
+    viewport.Position = UDim2.new(0, 0, 0, 32)
+    viewport.BackgroundTransparency = 1
+    viewport.Parent = mainArea
+    Components.createPadding(viewport, 10, 10, 12, 12)
 
-    -- Status Bar
+    -- Bottom Status Bar
     local statusBar = Instance.new("Frame")
     statusBar.Size = UDim2.new(1, 0, 0, Theme.Sizes.StatusBarHeight)
     statusBar.Position = UDim2.new(0, 0, 1, -Theme.Sizes.StatusBarHeight)
     statusBar.BackgroundColor3 = Theme.Colors.BgSidebar
     statusBar.BorderSizePixel = 0
     statusBar.Parent = mainFrame
-    Components.createPadding(statusBar, 0, 0, 16, 16)
+    Components.createPadding(statusBar, 0, 0, 12, 12)
 
-    local statusLabel = Instance.new("TextLabel")
-    statusLabel.Text = string.format("PlaceId: %d  |  Executor: %s  |  Atajo: [RightControl]", game.PlaceId, Env.ExecutorName)
-    statusLabel.Font = Theme.Fonts.Main
-    statusLabel.TextSize = Theme.Sizes.BodyText
-    statusLabel.TextColor3 = Theme.Colors.TextMuted
-    statusLabel.Size = UDim2.new(1, 0, 1, 0)
-    statusLabel.TextXAlignment = Enum.TextXAlignment.Left
-    statusLabel.BackgroundTransparency = 1
-    statusLabel.Parent = statusBar
+    local statusLeft = Instance.new("TextLabel")
+    statusLeft.Text = string.format("<> Untitled 1  •  ⊗ 0  ⚠️ 0")
+    statusLeft.Font = Theme.Fonts.Code
+    statusLeft.TextSize = 11
+    statusLeft.TextColor3 = Theme.Colors.TextMuted
+    statusLeft.Size = UDim2.new(0.5, 0, 1, 0)
+    statusLeft.TextXAlignment = Enum.TextXAlignment.Left
+    statusLeft.BackgroundTransparency = 1
+    statusLeft.Parent = statusBar
 
-    -- Tabs Configuration
-    local tabs = {
-        { Id = "Dashboard", Icon = "📊", Name = "Dashboard Pro" },
-        { Id = "Remotes",   Icon = "⚡", Name = "Remotes & Spy" },
-        { Id = "Modules",   Icon = "📦", Name = "Módulos & Code" },
-        { Id = "Jugador",   Icon = "👤", Name = "Jugador Stats" },
-        { Id = "Audit",     Icon = "🛡️", Name = "Seguridad Audit" },
-        { Id = "Exporter",  Icon = "💾", Name = "Exportar Dump" },
+    local statusRight = Instance.new("TextLabel")
+    statusRight.Text = string.format("Ln 1, Col 1  |  Spaces: 4  |  UTF-8  |  Luau  |  🟢 Attached")
+    statusRight.Font = Theme.Fonts.Code
+    statusRight.TextSize = 11
+    statusRight.TextColor3 = Theme.Colors.TextMuted
+    statusRight.Size = UDim2.new(0.5, 0, 1, 0)
+    statusRight.Position = UDim2.new(0.5, 0, 0, 0)
+    statusRight.TextXAlignment = Enum.TextXAlignment.Right
+    statusRight.BackgroundTransparency = 1
+    statusRight.Parent = statusBar
+
+    -- Files Definition
+    local scriptFiles = {
+        { Id = "Dashboard", Icon = "📄", Name = "Dashboard.luau" },
+        { Id = "Remotes",   Icon = "⚡", Name = "RemotesSpy.luau" },
+        { Id = "Modules",   Icon = "📦", Name = "ModulesExplorer.luau" },
+        { Id = "Jugador",   Icon = "👤", Name = "PlayerStats.luau" },
+        { Id = "Audit",     Icon = "🛡️", Name = "SecurityAudit.luau" },
+        { Id = "Exporter",  Icon = "💾", Name = "Exporter.luau" },
     }
 
     local activeViewFrame = nil
     local tabButtons = {}
+    local sidebarButtons = {}
 
     local function loadTab(tabId)
         if activeViewFrame then activeViewFrame:Destroy() end
 
         for id, btn in pairs(tabButtons) do
             if id == tabId then
-                btn.BackgroundColor3 = Theme.Colors.Accent
+                btn.BackgroundColor3 = Theme.Colors.BgMain
                 btn.TextColor3 = Theme.Colors.TextPrimary
             else
-                btn.BackgroundColor3 = Theme.Colors.BgSidebar
-                btn.TextColor3 = Theme.Colors.TextSecondary
+                btn.BackgroundColor3 = Theme.Colors.BgTabs
+                btn.TextColor3 = Theme.Colors.TextMuted
             end
         end
 
@@ -701,145 +807,76 @@ local function launchIDE()
             local scan = Scanner.scanRemotes()
             local vuln = Vulnerability.analyze()
 
-            -- Metrics Row (Cards with Glassmorphism)
-            local metricsFrame = Instance.new("Frame")
-            metricsFrame.Size = UDim2.new(1, 0, 0, 105)
-            metricsFrame.BackgroundTransparency = 1
-            metricsFrame.Parent = frame
+            local codeText = string.format([[--[[
+    GameAnalyzer v6.0 — Dashboard Summary
+    Place ID: %d | Place Name: %s
+    Executor: %s
+]]
 
-            local mLayout = Instance.new("UIListLayout")
-            mLayout.FillDirection = Enum.FillDirection.Horizontal
-            mLayout.Padding = UDim.new(0, 12)
-            mLayout.Parent = metricsFrame
+local Dashboard = {
+    TotalRemotes = %d,
+    StaffRemotes = %d,
+    SecurityScore = %d, -- Nivel de Riesgo: %s
+    OnlinePlayers = %d,
+}
 
-            Components.createMetricCard(metricsFrame, "REMOTOS DETECTADOS", scan.TotalCount, "TOTAL", Theme.Colors.Accent, "⚡")
-            Components.createMetricCard(metricsFrame, "REMOTOS DE STAFF", #scan.Categorized.STAFF, #scan.Categorized.STAFF > 0 and "ALERTA" or "OK", #scan.Categorized.STAFF > 0 and Theme.Colors.Danger or Theme.Colors.Success, "🛡️")
-            Components.createMetricCard(metricsFrame, "NIVEL DE RIESGO", vuln.RiskLevel, vuln.Score .. "/100", vuln.RiskLevel == "CRITICAL" and Theme.Colors.Danger or Theme.Colors.Success, "⚠️")
-
-            -- Place Details Glass Panel
-            local detailsPanel = Components.createGlassCard(frame, UDim2.new(1, 0, 1, -120), UDim2.new(0, 0, 0, 120))
-
-            local pTitle = Instance.new("TextLabel")
-            pTitle.Text = "📌 Detalles de Sesión & Servidor"
-            pTitle.Font = Theme.Fonts.Bold
-            pTitle.TextSize = Theme.Sizes.SubText
-            pTitle.TextColor3 = Theme.Colors.Accent
-            pTitle.Size = UDim2.new(1, 0, 0, 24)
-            pTitle.TextXAlignment = Enum.TextXAlignment.Left
-            pTitle.BackgroundTransparency = 1
-            pTitle.Parent = detailsPanel
-
-            local infoText = string.format([[
-  • Nombre del Lugar:  %s
-  • Place ID:          %d
-  • Game ID:           %d
-  • Job ID:            %s
-  • Jugadores Activos: %d / %s
-  • Creador ID:        %d
-  • Executor:          %s]],
-                game.Name,
-                game.PlaceId,
-                game.GameId,
-                game.JobId ~= "" and game.JobId or "Servidor Privado / Studio",
-                #Env.Services.Players:GetPlayers(),
-                tostring(Env.Services.Players.MaxPlayers),
-                game.CreatorId,
-                Env.ExecutorName
+return Dashboard]],
+                game.PlaceId, game.Name, Env.ExecutorName,
+                scan.TotalCount, #scan.Categorized.STAFF, vuln.Score, vuln.RiskLevel, #Env.Services.Players:GetPlayers()
             )
 
-            local pText = Instance.new("TextLabel")
-            pText.Text = infoText
-            pText.Font = Theme.Fonts.Code
-            pText.TextSize = 13
-            pText.TextColor3 = Theme.Colors.TextPrimary
-            pText.Size = UDim2.new(1, 0, 1, -32)
-            pText.Position = UDim2.new(0, 0, 0, 32)
-            pText.TextXAlignment = Enum.TextXAlignment.Left
-            pText.TextYAlignment = Enum.TextYAlignment.Top
-            pText.BackgroundTransparency = 1
-            pText.Parent = detailsPanel
+            Components.createCodeEditor(codeText, frame)
 
         elseif tabId == "Remotes" then
             local scan = Scanner.scanRemotes()
 
-            local actionBar = Instance.new("Frame")
-            actionBar.Size = UDim2.new(1, 0, 0, 38)
-            actionBar.BackgroundTransparency = 1
-            actionBar.Parent = frame
+            local topBar = Instance.new("Frame")
+            topBar.Size = UDim2.new(1, 0, 0, 32)
+            topBar.BackgroundTransparency = 1
+            topBar.Parent = frame
 
-            local spyBtn = Components.createGradientButton(RemoteSpy.Enabled and "⏹ Detener RemoteSpy" or "⚡ Iniciar Live RemoteSpy Hook", function(btn)
-                if RemoteSpy.Enabled then
-                    RemoteSpy.stop()
-                    Components.createToast(screenGui, "RemoteSpy", "Hook desactivado.", Theme.Colors.Warning)
-                else
-                    local ok = RemoteSpy.start()
-                    Components.createToast(screenGui, "RemoteSpy", ok and "Hook activado (__namecall interceptando remotos)!" or "Error al enganchar metamétodo.", ok and Theme.Colors.Success or Theme.Colors.Danger)
-                end
-            end, actionBar, Theme.Colors.AccentGradient1, Theme.Colors.AccentGradient2)
-            spyBtn.Size = UDim2.new(0, 260, 1, 0)
+            local spyBtn = Components.createButton(RemoteSpy.Enabled and "⏹ Stop RemoteSpy" or "⚡ Start Live RemoteSpy", function()
+                if RemoteSpy.Enabled then RemoteSpy.stop(); Components.createToast(screenGui, "RemoteSpy", "Hook desactivado.", Theme.Colors.Warning)
+                else RemoteSpy.start(); Components.createToast(screenGui, "RemoteSpy", "Hook activado en __namecall!", Theme.Colors.Success) end
+            end, topBar, Theme.Colors.BgCard)
+            spyBtn.Size = UDim2.new(0, 180, 1, 0)
 
             local listFrame = Instance.new("Frame")
-            listFrame.Size = UDim2.new(0.48, 0, 1, -48)
-            listFrame.Position = UDim2.new(0, 0, 0, 48)
+            listFrame.Size = UDim2.new(0.42, 0, 1, -38)
+            listFrame.Position = UDim2.new(0, 0, 0, 38)
             listFrame.BackgroundTransparency = 1
             listFrame.Parent = frame
 
             local scroll = Instance.new("ScrollingFrame")
-            scroll.Size = UDim2.new(1, 0, 1, 0)
-            scroll.BackgroundTransparency = 1
-            scroll.ScrollBarThickness = 5
-            scroll.ScrollBarImageColor3 = Theme.Colors.Accent
-            scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
-            scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
-            scroll.Parent = listFrame
+            scroll.Size = UDim2.new(1, 0, 1, 0); scroll.BackgroundTransparency = 1; scroll.ScrollBarThickness = 4; scroll.Parent = listFrame
+            local layout = Instance.new("UIListLayout"); layout.Padding = UDim.new(0, 4); layout.Parent = scroll
 
-            local layout = Instance.new("UIListLayout")
-            layout.Padding = UDim.new(0, 6)
-            layout.Parent = scroll
+            local editorFrame = Instance.new("Frame")
+            editorFrame.Size = UDim2.new(0.56, 0, 1, -38)
+            editorFrame.Position = UDim2.new(0.44, 0, 0, 38)
+            editorFrame.BackgroundTransparency = 1
+            editorFrame.Parent = frame
 
-            local previewFrame = Instance.new("Frame")
-            previewFrame.Size = UDim2.new(0.5, 0, 1, -48)
-            previewFrame.Position = UDim2.new(0.5, 0, 0, 48)
-            previewFrame.BackgroundColor3 = Theme.Colors.BgCode
-            previewFrame.Parent = frame
-
-            local currentCodeBox = Components.createCodeViewer("-- Selecciona un remoto para ver su código ejecutable.", previewFrame)
+            local currentEditor = Components.createCodeEditor("-- Selecciona un remoto del explorador para ver su código Luau.", editorFrame)
 
             for _, r in ipairs(scan.RemoteEvents) do
                 local card = Instance.new("Frame")
-                card.Size = UDim2.new(1, 0, 0, 42)
-                card.BackgroundColor3 = Theme.Colors.BgCard
-                card.BorderSizePixel = 0
-                Components.createCorner(card, Theme.Corners.Badge)
-                Components.createStroke(card, Theme.Colors.Border, 1, 0.4)
-
-                local badgeColor = Config.CategoryColors[r.Category] or Theme.Colors.TextMuted
-                local badge = Components.createBadge(r.Category, badgeColor, card)
-                badge.Position = UDim2.new(0, 8, 0.5, -9)
+                card.Size = UDim2.new(1, 0, 0, 32); card.BackgroundColor3 = Theme.Colors.BgCard; Components.createCorner(card, Theme.Corners.Badge)
+                Components.createBadge(r.Category, Config.CategoryColors[r.Category], card).Position = UDim2.new(0, 6, 0.5, -9)
 
                 local l = Instance.new("TextLabel")
-                l.Text = r.Name
-                l.Font = Theme.Fonts.Bold
-                l.TextSize = 12
-                l.TextColor3 = Theme.Colors.TextPrimary
-                l.Position = UDim2.new(0, 104, 0, 0)
-                l.Size = UDim2.new(0.65, 0, 1, 0)
-                l.TextXAlignment = Enum.TextXAlignment.Left
-                l.BackgroundTransparency = 1
-                l.Parent = card
+                l.Text = r.Name; l.Font = Theme.Fonts.Code; l.TextSize = 11; l.TextColor3 = Theme.Colors.TextPrimary; l.Position = UDim2.new(0, 95, 0, 0); l.Size = UDim2.new(0.65, 0, 1, 0); l.TextXAlignment = Enum.TextXAlignment.Left; l.BackgroundTransparency = 1; l.Parent = card
 
                 local selectBtn = Instance.new("TextButton")
-                selectBtn.Size = UDim2.new(1, 0, 1, 0)
-                selectBtn.BackgroundTransparency = 1
-                selectBtn.Text = ""
-                selectBtn.Parent = card
-
+                selectBtn.Size = UDim2.new(1, 0, 1, 0); selectBtn.BackgroundTransparency = 1; selectBtn.Text = ""; selectBtn.Parent = card
                 selectBtn.MouseButton1Click:Connect(function()
-                    local snippet = string.format("-- Código de Invocación para: %s\nlocal Remote = %s\nRemote:FireServer()", r.Name, r.FullName)
-                    currentCodeBox:Destroy()
-                    currentCodeBox = Components.createCodeViewer(snippet, previewFrame)
-                    Exporter.copyToClipboard(snippet)
-                    Components.createToast(screenGui, "Snippet Generado", "Copiado al portapapeles!", Theme.Colors.Success)
+                    local code = string.format([[-- Remoto: %s
+local Remote = %s
+Remote:FireServer()]], r.Name, r.FullName)
+                    currentEditor:Destroy()
+                    currentEditor = Components.createCodeEditor(code, editorFrame)
+                    Exporter.copyToClipboard(code)
+                    Components.createToast(screenGui, "Copiado", r.Name, Theme.Colors.Success)
                 end)
 
                 card.Parent = scroll
@@ -847,62 +884,29 @@ local function launchIDE()
 
         elseif tabId == "Modules" then
             local mods = Scanner.scanModules()
-
             local listFrame = Instance.new("Frame")
-            listFrame.Size = UDim2.new(0.42, 0, 1, 0)
-            listFrame.BackgroundTransparency = 1
-            listFrame.Parent = frame
-
+            listFrame.Size = UDim2.new(0.4, 0, 1, 0); listFrame.BackgroundTransparency = 1; listFrame.Parent = frame
             local scroll = Instance.new("ScrollingFrame")
-            scroll.Size = UDim2.new(1, 0, 1, 0)
-            scroll.BackgroundTransparency = 1
-            scroll.ScrollBarThickness = 5
-            scroll.ScrollBarImageColor3 = Theme.Colors.Accent
-            scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
-            scroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
-            scroll.Parent = listFrame
+            scroll.Size = UDim2.new(1, 0, 1, 0); scroll.BackgroundTransparency = 1; scroll.ScrollBarThickness = 4; scroll.Parent = listFrame
+            local layout = Instance.new("UIListLayout"); layout.Padding = UDim.new(0, 4); layout.Parent = scroll
 
-            local layout = Instance.new("UIListLayout")
-            layout.Padding = UDim.new(0, 5)
-            layout.Parent = scroll
+            local editorFrame = Instance.new("Frame")
+            editorFrame.Size = UDim2.new(0.58, 0, 1, 0); editorFrame.Position = UDim2.new(0.42, 0, 0, 0); editorFrame.BackgroundTransparency = 1; editorFrame.Parent = frame
 
-            local codePane = Instance.new("Frame")
-            codePane.Size = UDim2.new(0.56, 0, 1, 0)
-            codePane.Position = UDim2.new(0.44, 0, 0, 0)
-            codePane.BackgroundColor3 = Theme.Colors.BgCode
-            codePane.Parent = frame
-
-            local codeBox = Components.createCodeViewer("-- Haz clic en un ModuleScript para visualizar su código fuente decompilado.", codePane)
+            local currentEditor = Components.createCodeEditor("-- Haz clic en un ModuleScript para visualizar su código fuente decompilado.", editorFrame)
 
             for _, m in ipairs(mods) do
                 local card = Instance.new("Frame")
-                card.Size = UDim2.new(1, 0, 0, 36)
-                card.BackgroundColor3 = Theme.Colors.BgCard
-                card.BorderSizePixel = 0
-                Components.createCorner(card, Theme.Corners.Badge)
-                Components.createStroke(card, Theme.Colors.Border, 1, 0.4)
-
+                card.Size = UDim2.new(1, 0, 0, 32); card.BackgroundColor3 = Theme.Colors.BgCard; Components.createCorner(card, Theme.Corners.Badge)
                 local l = Instance.new("TextLabel")
-                l.Text = "📦  " .. m.Name
-                l.Font = Theme.Fonts.Code
-                l.TextSize = 12
-                l.TextColor3 = Theme.Colors.TextPrimary
-                l.Position = UDim2.new(0, 10, 0, 0)
-                l.Size = UDim2.new(0.9, 0, 1, 0)
-                l.TextXAlignment = Enum.TextXAlignment.Left
-                l.BackgroundTransparency = 1
-                l.Parent = card
+                l.Text = "📄 " .. m.Name; l.Font = Theme.Fonts.Code; l.TextSize = 11; l.TextColor3 = Theme.Colors.TextPrimary; l.Position = UDim2.new(0, 8, 0, 0); l.Size = UDim2.new(0.9, 0, 1, 0); l.TextXAlignment = Enum.TextXAlignment.Left; l.BackgroundTransparency = 1; l.Parent = card
 
-                local clickBtn = Instance.new("TextButton")
-                clickBtn.Size = UDim2.new(1, 0, 1, 0)
-                clickBtn.BackgroundTransparency = 1
-                clickBtn.Text = ""
-                clickBtn.Parent = card
-
-                clickBtn.MouseButton1Click:Connect(function()
-                    local code = ModuleInspector.decompileScript(m.Instance)
-                    codeBox:Destroy()
-                    codeBox = Components.createCodeViewer(code, codePane)
+                local selectBtn = Instance.new("TextButton")
+                selectBtn.Size = UDim2.new(1, 0, 1, 0); selectBtn.BackgroundTransparency = 1; selectBtn.Text = ""; selectBtn.Parent = card
+                selectBtn.MouseButton1Click:Connect(function()
+                    local decomp = ModuleInspector.decompileScript(m.Instance)
+                    currentEditor:Destroy()
+                    currentEditor = Components.createCodeEditor(decomp, editorFrame)
                 end)
 
                 card.Parent = scroll
@@ -910,203 +914,108 @@ local function launchIDE()
 
         elseif tabId == "Jugador" then
             local pData = Scanner.scanPlayerData()
-            local scroll = Instance.new("ScrollingFrame")
-            scroll.Size = UDim2.new(1, 0, 1, 0)
-            scroll.BackgroundTransparency = 1
-            scroll.ScrollBarThickness = 5
-            scroll.Parent = frame
+            local codeText = string.format([[--[[
+    Player Stats & Leaderstats Inspector
+    Jugador: %s
+]]
 
-            local layout = Instance.new("UIListLayout")
-            layout.Padding = UDim.new(0, 12)
-            layout.Parent = scroll
-
-            local pCard = Components.createGlassCard(scroll, UDim2.new(1, 0, 0, 110))
-
-            local pName = Instance.new("TextLabel")
-            pName.Text = "👤 Jugador: " .. (Env.LocalPlayer and Env.LocalPlayer.Name or "LocalPlayer")
-            pName.Font = Theme.Fonts.Bold
-            pName.TextSize = 16
-            pName.TextColor3 = Theme.Colors.Accent
-            pName.Size = UDim2.new(1, 0, 0, 24)
-            pName.TextXAlignment = Enum.TextXAlignment.Left
-            pName.BackgroundTransparency = 1
-            pName.Parent = pCard
-
-            local statsStr = "Sin datos de Humanoid"
-            if pData.Character.WalkSpeed then
-                statsStr = string.format("WalkSpeed: %.1f   |   JumpPower: %.1f   |   Salud: %.1f / %.1f",
-                    pData.Character.WalkSpeed, pData.Character.JumpPower, pData.Character.Health, pData.Character.MaxHealth)
-            end
-
-            local pStats = Instance.new("TextLabel")
-            pStats.Text = statsStr
-            pStats.Font = Theme.Fonts.Code
-            pStats.TextSize = 13
-            pStats.TextColor3 = Theme.Colors.TextPrimary
-            pStats.Size = UDim2.new(1, 0, 0, 24)
-            pStats.Position = UDim2.new(0, 0, 0, 32)
-            pStats.TextXAlignment = Enum.TextXAlignment.Left
-            pStats.BackgroundTransparency = 1
-            pStats.Parent = pCard
-
-            local lsTitle = Instance.new("TextLabel")
-            lsTitle.Text = "💰 Leaderstats & Currencies"
-            lsTitle.Font = Theme.Fonts.Bold
-            lsTitle.TextSize = 14
-            lsTitle.TextColor3 = Theme.Colors.TextSecondary
-            lsTitle.Size = UDim2.new(1, 0, 0, 24)
-            lsTitle.TextXAlignment = Enum.TextXAlignment.Left
-            lsTitle.BackgroundTransparency = 1
-            lsTitle.Parent = scroll
+local PlayerData = {
+    Humanoid = {
+        WalkSpeed = %.1f,
+        JumpPower = %.1f,
+        Health = %.1f,
+        MaxHealth = %.1f,
+    },
+    Leaderstats = {
+]], (Env.LocalPlayer and Env.LocalPlayer.Name or "LocalPlayer"),
+                pData.Character.WalkSpeed or 16, pData.Character.JumpPower or 50,
+                pData.Character.Health or 100, pData.Character.MaxHealth or 100
+            )
 
             for _, ls in ipairs(pData.Leaderstats) do
-                local cCard = Instance.new("Frame")
-                cCard.Size = UDim2.new(1, 0, 0, 40)
-                cCard.BackgroundColor3 = Theme.Colors.BgCard
-                Components.createCorner(cCard, Theme.Corners.Badge)
-                Components.createPadding(cCard, 0, 0, 14, 14)
-                Components.createStroke(cCard, Theme.Colors.Border, 1, 0.4)
-
-                local cName = Instance.new("TextLabel")
-                cName.Text = ls.Name
-                cName.Font = Theme.Fonts.Bold
-                cName.TextSize = 13
-                cName.TextColor3 = Theme.Colors.TextPrimary
-                cName.Size = UDim2.new(0.5, 0, 1, 0)
-                cName.TextXAlignment = Enum.TextXAlignment.Left
-                cName.BackgroundTransparency = 1
-                cName.Parent = cCard
-
-                local cVal = Instance.new("TextLabel")
-                cVal.Text = tostring(ls.Value)
-                cVal.Font = Theme.Fonts.Code
-                cVal.TextSize = 13
-                cVal.TextColor3 = Theme.Colors.Success
-                cVal.Size = UDim2.new(0.5, 0, 1, 0)
-                cVal.Position = UDim2.new(0.5, 0, 0, 0)
-                cVal.TextXAlignment = Enum.TextXAlignment.Right
-                cVal.BackgroundTransparency = 1
-                cVal.Parent = cCard
-
-                cCard.Parent = scroll
+                codeText = codeText .. string.format("        %s = %s,\n", ls.Name, tostring(ls.Value))
             end
+            codeText = codeText .. "    }\n}\n\nreturn PlayerData"
+
+            Components.createCodeEditor(codeText, frame)
 
         elseif tabId == "Audit" then
             local vuln = Vulnerability.analyze()
+            local codeText = string.format([[--[[
+    Security Vulnerability Audit Report
+    Overall Risk Level: %s (Score: %d / 100)
+]]
 
-            local scroll = Instance.new("ScrollingFrame")
-            scroll.Size = UDim2.new(1, 0, 1, 0)
-            scroll.BackgroundTransparency = 1
-            scroll.ScrollBarThickness = 5
-            scroll.Parent = frame
+local AuditFindings = {
+]], vuln.RiskLevel, vuln.Score)
 
-            local layout = Instance.new("UIListLayout")
-            layout.Padding = UDim.new(0, 10)
-            layout.Parent = scroll
-
-            local auditCard = Components.createGlassCard(scroll, UDim2.new(1, 0, 0, 70))
-            Components.createStroke(auditCard, vuln.RiskLevel == "CRITICAL" and Theme.Colors.Danger or Theme.Colors.Success, 1.5)
-
-            local aTitle = Instance.new("TextLabel")
-            aTitle.Text = "🛡️ Auditoría de Seguridad Automatizada — Riesgo: " .. vuln.RiskLevel
-            aTitle.Font = Theme.Fonts.Bold
-            aTitle.TextSize = 15
-            aTitle.TextColor3 = vuln.RiskLevel == "CRITICAL" and Theme.Colors.Danger or Theme.Colors.Success
-            aTitle.Size = UDim2.new(1, 0, 0, 22)
-            aTitle.TextXAlignment = Enum.TextXAlignment.Left
-            aTitle.BackgroundTransparency = 1
-            aTitle.Parent = auditCard
-
-            for _, f in ipairs(vuln.Findings) do
-                local fCard = Instance.new("Frame")
-                fCard.Size = UDim2.new(1, 0, 0, 78)
-                fCard.BackgroundColor3 = Theme.Colors.BgCard
-                Components.createCorner(fCard, Theme.Corners.Card)
-                Components.createPadding(fCard, 10, 10, 14, 14)
-                Components.createStroke(fCard, f.Severity == "CRITICAL" and Theme.Colors.Danger or Theme.Colors.Warning, 1, 0.4)
-
-                local fTitle = Instance.new("TextLabel")
-                fTitle.Text = "[" .. f.Severity .. "]  " .. f.Title
-                fTitle.Font = Theme.Fonts.Bold
-                fTitle.TextSize = 13
-                fTitle.TextColor3 = f.Severity == "CRITICAL" and Theme.Colors.Danger or Theme.Colors.Warning
-                fTitle.Size = UDim2.new(1, 0, 0, 20)
-                fTitle.TextXAlignment = Enum.TextXAlignment.Left
-                fTitle.BackgroundTransparency = 1
-                fTitle.Parent = fCard
-
-                local fDesc = Instance.new("TextLabel")
-                fDesc.Text = f.Description
-                fDesc.Font = Theme.Fonts.Main
-                fDesc.TextSize = 12
-                fDesc.TextColor3 = Theme.Colors.TextSecondary
-                fDesc.Size = UDim2.new(1, 0, 0, 38)
-                fDesc.Position = UDim2.new(0, 0, 0, 22)
-                fDesc.TextWrapped = true
-                fDesc.TextXAlignment = Enum.TextXAlignment.Left
-                fDesc.BackgroundTransparency = 1
-                fDesc.Parent = fCard
-
-                fCard.Parent = scroll
+            for idx, f in ipairs(vuln.Findings) do
+                codeText = codeText .. string.format("    [%d] = {\n        Severity = %q,\n        Title = %q,\n        Description = %q,\n    },\n", idx, f.Severity, f.Title, f.Description)
             end
+            codeText = codeText .. "}\n\nreturn AuditFindings"
+
+            Components.createCodeEditor(codeText, frame)
 
         elseif tabId == "Exporter" then
-            local card = Components.createGlassCard(frame, UDim2.new(0.65, 0, 0.55, 0), UDim2.new(0.175, 0, 0.2, 0))
+            local codeText = string.format([[--[[
+    Exporter Tool — Press [Run Exporter] to generate full dump file in /ReverseKit/
+]]
 
-            local eTitle = Instance.new("TextLabel")
-            eTitle.Text = "💾 Exportar Informe de Análisis (.txt)"
-            eTitle.Font = Theme.Fonts.Bold
-            eTitle.TextSize = 16
-            eTitle.TextColor3 = Theme.Colors.Accent
-            eTitle.Size = UDim2.new(1, 0, 0, 24)
-            eTitle.TextXAlignment = Enum.TextXAlignment.Left
-            eTitle.BackgroundTransparency = 1
-            eTitle.Parent = card
+local Exporter = {}
 
-            local eDesc = Instance.new("TextLabel")
-            eDesc.Text = "Guarda el reporte completo estructurado con remotos, categorías y diagnóstico de seguridad en la carpeta /ReverseKit/ de tu executor."
-            eDesc.Font = Theme.Fonts.Main
-            eDesc.TextSize = 12
-            eDesc.TextColor3 = Theme.Colors.TextSecondary
-            eDesc.Size = UDim2.new(1, 0, 0, 48)
-            eDesc.Position = UDim2.new(0, 0, 0, 32)
-            eDesc.TextWrapped = true
-            eDesc.TextXAlignment = Enum.TextXAlignment.Left
-            eDesc.BackgroundTransparency = 1
-            eDesc.Parent = card
+function Exporter.export()
+    print("[GameAnalyzer] Dumping place data for PlaceId: %d...")
+end
 
-            local btn = Components.createGradientButton("💾 Generar y Guardar Dump (.txt)", function()
+return Exporter]], game.PlaceId)
+
+            local edFrame = Instance.new("Frame")
+            edFrame.Size = UDim2.new(1, 0, 1, -44); edFrame.BackgroundTransparency = 1; edFrame.Parent = frame
+            Components.createCodeEditor(codeText, edFrame)
+
+            local runExpBtn = Components.createButton("💾 Run Exporter (.txt)", function()
                 local scan = Scanner.scanRemotes()
                 local vuln = Vulnerability.analyze()
-                local txt = string.format("====================================================\nGameAnalyzer Dump — Place: %d\nTotal Remotes: %d | Riesgo: %s (%d/100)\nFecha: %s\n====================================================\n", game.PlaceId, scan.TotalCount, vuln.RiskLevel, vuln.Score, os.date("%X"))
-                for _, r in ipairs(scan.RemoteEvents) do
-                    txt = txt .. string.format("[%s] %s\n", r.Category, r.FullName)
-                end
+                local txt = string.format("GameAnalyzer Dump — Place: %d\nRemotes: %d | Risk: %s\nDate: %s\n", game.PlaceId, scan.TotalCount, vuln.RiskLevel, os.date("%X"))
                 local ok, path = Exporter.saveFile("Place_" .. game.PlaceId .. "_Dump.txt", txt)
-                Components.createToast(screenGui, ok and "Guardado Exitoso" or "Error al Guardar", ok and path or tostring(path), ok and Theme.Colors.Success or Theme.Colors.Danger)
-            end, card, Theme.Colors.AccentGradient1, Theme.Colors.AccentGradient2)
-            btn.Size = UDim2.new(1, 0, 0, 44)
-            btn.Position = UDim2.new(0, 0, 1, -44)
+                Components.createToast(screenGui, ok and "Guardado Exitoso" or "Error", path, ok and Theme.Colors.Success or Theme.Colors.Danger)
+            end, frame, Theme.Colors.BgCard)
+            runExpBtn.Size = UDim2.new(0, 200, 0, 32)
+            runExpBtn.Position = UDim2.new(0, 0, 1, -34)
         end
     end
 
-    for _, t in ipairs(tabs) do
-        local btn = Instance.new("TextButton")
-        btn.Text = "  " .. t.Icon .. "  " .. t.Name
-        btn.Font = Theme.Fonts.Bold
-        btn.TextSize = 12
-        btn.TextColor3 = Theme.Colors.TextSecondary
-        btn.TextXAlignment = Enum.TextXAlignment.Left
-        btn.BackgroundColor3 = Theme.Colors.BgSidebar
-        btn.Size = UDim2.new(1, 0, 0, 38)
-        btn.BorderSizePixel = 0
-        Components.createCorner(btn, Theme.Corners.Button)
-        Components.createPadding(btn, 0, 0, 12, 12)
+    -- Build Sidebar Items & File Tabs Bar Buttons
+    for idx, fileItem in ipairs(scriptFiles) do
+        -- Sidebar item (Potassium style script list)
+        local sbBtn = Instance.new("TextButton")
+        sbBtn.Text = "  " .. fileItem.Icon .. "  " .. fileItem.Name
+        sbBtn.Font = Theme.Fonts.Code
+        sbBtn.TextSize = 11
+        sbBtn.TextColor3 = Theme.Colors.TextSecondary
+        sbBtn.TextXAlignment = Enum.TextXAlignment.Left
+        sbBtn.BackgroundColor3 = Theme.Colors.BgSidebar
+        sbBtn.Size = UDim2.new(1, 0, 0, 28)
+        sbBtn.BorderSizePixel = 0
+        Components.createCorner(sbBtn, Theme.Corners.Button)
 
-        btn.MouseButton1Click:Connect(function() loadTab(t.Id) end)
+        sbBtn.MouseButton1Click:Connect(function() loadTab(fileItem.Id) end)
+        sbBtn.Parent = scrollSidebar
 
-        tabButtons[t.Id] = btn
-        btn.Parent = sidebar
+        -- Top File Tab
+        local tabBtn = Instance.new("TextButton")
+        tabBtn.Text = " " .. fileItem.Icon .. " " .. fileItem.Name .. "  ✕ "
+        tabBtn.Font = Theme.Fonts.Code
+        tabBtn.TextSize = 11
+        tabBtn.TextColor3 = Theme.Colors.TextMuted
+        tabBtn.BackgroundColor3 = Theme.Colors.BgTabs
+        tabBtn.BorderSizePixel = 0
+        tabBtn.Size = UDim2.new(0, 135, 1, 0)
+        Components.createCorner(tabBtn, Theme.Corners.Button)
+
+        tabBtn.MouseButton1Click:Connect(function() loadTab(fileItem.Id) end)
+        tabButtons[fileItem.Id] = tabBtn
+        tabBtn.Parent = tabBar
     end
 
     Env.Services.UserInputService.InputBegan:Connect(function(input, gpe)
@@ -1115,13 +1024,10 @@ local function launchIDE()
         end
     end)
 
-    screenGui.Parent = parentGui
     loadTab("Dashboard")
-    Components.createToast(screenGui, "GameAnalyzer v6.0 IDE Pro", "Cargado con Glassmorphism & Gradients! Presiona [RightControl] para ocultar/mostrar.", Theme.Colors.Accent)
+    Components.createToast(screenGui, "Potassium IDE Replica", "Cargado exactamente como Potassium IDE! Presiona [RightControl] para ocultar/mostrar.", Theme.Colors.AccentAmber)
 end
 
-print("[GameAnalyzer v6.0 IDE Glass Pro] Iniciando en Potassium...")
+print("[GameAnalyzer v6.0 Potassium Replica] Iniciando...")
 local success, err = pcall(launchIDE)
-if not success then
-    warn("[GameAnalyzer Error de Inicio]:", err)
-end
+if not success then warn("[GameAnalyzer Error de Inicio]:", err) end
