@@ -1,14 +1,15 @@
 --[[
     ════════════════════════════════════════════════════════════════════
-    ⚡ GameAnalyzer v7.0 IDE Edition — Modern UI Framework
+    ⚡ GameAnalyzer v7.1 IDE Edition — Advanced Backend Logic
     ════════════════════════════════════════════════════════════════════
-    Based on ModernRobloxUI + Real IDE Layout (Explorer, Code, Terminal)
+    Added: RemoteSpy, Deep Scanner, Security Auditor, Dumper Export.
     ════════════════════════════════════════════════════════════════════
 ]]
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Lighting = game:GetService("Lighting")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -29,7 +30,8 @@ end
 Env.CAPS = {
     writefile = hasFn("writefile"), readfile = hasFn("readfile"),
     hookmetamethod = hasFn("hookmetamethod"), getnamecallmethod = hasFn("getnamecallmethod"),
-    setclipboard = hasFn("setclipboard"), decompile = hasFn("decompile")
+    setclipboard = hasFn("setclipboard"), decompile = hasFn("decompile"),
+    checkcaller = hasFn("checkcaller")
 }
 
 local function decompileScript(s)
@@ -401,6 +403,24 @@ local function logTerminal(msg, color)
 end
 
 ----------------------------------------------------------------
+-- Logic: Security Auditor & Exporter
+----------------------------------------------------------------
+local function scanSecurity(name, code)
+    local warnings = {}
+    if string.find(code, "Kick") then table.insert(warnings, "Llamada a Kick() detectada.") end
+    if string.find(code, "CoreGui") then table.insert(warnings, "Acceso a CoreGui (Posible escaneo anti-cheat).") end
+    if string.find(code, "getfenv") or string.find(code, "setfenv") then table.insert(warnings, "Uso de getfenv/setfenv detectado.") end
+    if string.find(code, "discord%.com/api/webhooks") then table.insert(warnings, "URL de Discord Webhook detectada.") end
+    
+    if #warnings > 0 then
+        logTerminal("⚠️ Security Alert in " .. name .. ":", Theme.Danger)
+        for _, w in ipairs(warnings) do logTerminal("  -> " .. w, Theme.Danger) end
+    else
+        logTerminal("✅ Security Check passed for " .. name, Theme.Success)
+    end
+end
+
+----------------------------------------------------------------
 -- Logic: Tabs & Explorer
 ----------------------------------------------------------------
 local openTabs = {}
@@ -434,7 +454,7 @@ local function openFileTab(name, content)
     end
 
     local tabBtn = Instance.new("TextButton")
-    tabBtn.Size = UDim2.fromOffset(120, 36)
+    tabBtn.Size = UDim2.fromOffset(140, 36)
     tabBtn.BackgroundColor3 = Theme.Surface
     tabBtn.BorderSizePixel = 0
     tabBtn.Text = ""
@@ -449,8 +469,27 @@ local function openFileTab(name, content)
 
     local lbl = label(tabBtn, name, 12, Theme.TextSecondary, false)
     lbl.Position = UDim2.fromOffset(14, 0)
-    lbl.Size = UDim2.new(1, -34, 1, 0)
+    lbl.Size = UDim2.new(1, -54, 1, 0)
     
+    -- Save (Export) Button
+    local saveBtn = Instance.new("TextButton")
+    saveBtn.Size = UDim2.fromOffset(16, 16)
+    saveBtn.Position = UDim2.new(1, -40, 0.5, -8)
+    saveBtn.BackgroundTransparency = 1
+    saveBtn.Text = "💾"
+    saveBtn.TextColor3 = Theme.TextSecondary
+    saveBtn.Parent = tabBtn
+    saveBtn.MouseButton1Click:Connect(function()
+        if Env.CAPS.writefile then
+            local success, err = pcall(writefile, "GameAnalyzer_" .. name, content)
+            if success then logTerminal("Saved " .. name .. " to executor workspace.", Theme.Success)
+            else logTerminal("Failed to save: " .. tostring(err), Theme.Danger) end
+        else
+            logTerminal("Error: writefile is not supported by your executor.", Theme.Danger)
+        end
+    end)
+    
+    -- Close Button
     local closeBtn = Instance.new("TextButton")
     closeBtn.Size = UDim2.fromOffset(16, 16)
     closeBtn.Position = UDim2.new(1, -22, 0.5, -8)
@@ -503,6 +542,7 @@ local function createExplorerItem(name, icon, typeStr, instanceRef)
         if instanceRef:IsA("ModuleScript") or instanceRef:IsA("LocalScript") then
             local source = decompileScript(instanceRef)
             content = content .. source
+            scanSecurity(name, source)
         else
             content = content .. "-- Cannot decompile non-script instances."
         end
@@ -511,28 +551,66 @@ local function createExplorerItem(name, icon, typeStr, instanceRef)
 end
 
 ----------------------------------------------------------------
--- Scanners & Initialization
+-- Logic: Network Auditor (Remote Spy)
 ----------------------------------------------------------------
-local function runScanners()
-    logTerminal("Scanning ReplicatedStorage for Modules...", Theme.Success)
-    local count = 0
-    for _, v in ipairs(ReplicatedStorage:GetDescendants()) do
-        if v:IsA("ModuleScript") then
-            createExplorerItem(v.Name .. ".luau", "📄", "ModuleScript", v)
-            count = count + 1
-        end
-        if count > 50 then break end -- Limit for performance demo
+local function setupRemoteSpy()
+    if Env.CAPS.hookmetamethod and Env.CAPS.getnamecallmethod and Env.CAPS.checkcaller then
+        logTerminal("Initializing Network Auditor (RemoteSpy)...", Theme.Success)
+        local oldNamecall
+        oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+            local method = getnamecallmethod()
+            if not checkcaller() and (method == "FireServer" or method == "InvokeServer") then
+                local args = {...}
+                local logStr = string.format("[Network] %s: %s", method, tostring(self))
+                if #args > 0 then logStr = logStr .. " | Args: " .. tostring(#args) end
+                
+                -- Spawn to avoid yielding or breaking the game thread
+                task.spawn(function()
+                    logTerminal(logStr, Theme.Accent)
+                end)
+            end
+            return oldNamecall(self, ...)
+        end)
+    else
+        logTerminal("Network Auditor unavailable: executor lacks hookmetamethod/checkcaller.", Theme.Danger)
     end
-    logTerminal("Found " .. tostring(count) .. " modules.", Theme.TextSecondary)
 end
 
 ----------------------------------------------------------------
--- Initial Animation
+-- Logic: Deep Scanner
+----------------------------------------------------------------
+local function runScanners()
+    logTerminal("Starting Deep Game Scan (Looking for LocalScripts & Modules)...", Theme.Success)
+    local count = 0
+    local targets = {workspace, Players, ReplicatedStorage, Lighting}
+    
+    for _, rootNode in ipairs(targets) do
+        -- Wrapped in pcall to avoid permission errors on protected services
+        pcall(function()
+            for _, v in ipairs(rootNode:GetDescendants()) do
+                if v:IsA("ModuleScript") or v:IsA("LocalScript") then
+                    local icon = v:IsA("ModuleScript") and "📄" or "📜"
+                    createExplorerItem(v.Name .. (v:IsA("ModuleScript") and ".luau" or ".lua"), icon, v.ClassName, v)
+                    count = count + 1
+                end
+                if count >= 300 then break end -- Limit to prevent massive lag spike
+            end
+        end)
+        if count >= 300 then break end
+    end
+    logTerminal("Deep Scan complete. Found " .. tostring(count) .. " scripts.", Theme.TextSecondary)
+end
+
+----------------------------------------------------------------
+-- Initial Animation & Boot
 ----------------------------------------------------------------
 window.Size = UDim2.fromOffset(1200, 660)
 window.BackgroundTransparency = 0.05
 tween(window, Theme.Slow, { Size = UDim2.fromOffset(1280, 720), BackgroundTransparency = 0 })
 
-logTerminal("GameAnalyzer IDE v7.0 loaded successfully.", Theme.Success)
+logTerminal("GameAnalyzer IDE v7.1 loaded successfully.", Theme.Success)
 logTerminal("Environment: " .. Env.ExecutorName)
+
+-- Start backend systems
+setupRemoteSpy()
 runScanners()
