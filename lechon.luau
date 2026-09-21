@@ -126,17 +126,33 @@ end
 
 local function highlightLuauCode(sourceText)
     if type(sourceText) ~= "string" then return "" end
-    local safeLine = sourceText:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;")
-    safeLine = safeLine:gsub("%f[%a](local)%f[%A]", '<font color="#da9148">local</font>')
-    safeLine = safeLine:gsub("%f[%a](function)%f[%A]", '<font color="#da9148">function</font>')
-    safeLine = safeLine:gsub("%f[%a](end)%f[%A]", '<font color="#da9148">end</font>')
-    safeLine = safeLine:gsub("%f[%a](return)%f[%A]", '<font color="#da9148">return</font>')
-    safeLine = safeLine:gsub("%f[%a](if)%f[%A]", '<font color="#da9148">if</font>')
-    safeLine = safeLine:gsub("%f[%a](then)%f[%A]", '<font color="#da9148">then</font>')
-    safeLine = safeLine:gsub("%f[%a](else)%f[%A]", '<font color="#da9148">else</font>')
-    safeLine = safeLine:gsub("%f[%a](game)%f[%A]", '<font color="#5abe7d">game</font>')
-    safeLine = safeLine:gsub('(".-")', '<font color="#e6a95d">%1</font>')
-    return safeLine
+    local s = sourceText:gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;")
+    
+    local strings = {}
+    s = s:gsub('("[^"]*")', function(match)
+        table.insert(strings, match)
+        return "\0" .. #strings .. "\0"
+    end)
+    
+    local keywords = {
+        ["local"] = "#569CD6", ["function"] = "#569CD6", ["end"] = "#569CD6",
+        ["return"] = "#C586C0", ["if"] = "#C586C0", ["then"] = "#C586C0", ["else"] = "#C586C0", ["elseif"] = "#C586C0",
+        ["for"] = "#C586C0", ["in"] = "#C586C0", ["do"] = "#C586C0", ["while"] = "#C586C0", ["break"] = "#C586C0",
+        ["game"] = "#4EC9B0", ["workspace"] = "#4EC9B0", ["script"] = "#4EC9B0",
+        ["true"] = "#569CD6", ["false"] = "#569CD6", ["nil"] = "#569CD6"
+    }
+    
+    for kw, col in pairs(keywords) do
+        s = s:gsub("%f[%w]" .. kw .. "%f[%W]", '<font color="' .. col .. '">' .. kw .. '</font>')
+    end
+    
+    s = s:gsub("%z(%d+)%z", function(id)
+        return '<font color="#CE9178">' .. strings[tonumber(id)] .. '</font>'
+    end)
+    
+    s = s:gsub("(%-%-[^\n]*)", '<font color="#6A9955">%1</font>')
+    
+    return s
 end
 
 ----------------------------------------------------------------
